@@ -1,10 +1,24 @@
 # website-azure
-Este site tem como objetivo apresentar estatísticas e informações detalhadas sobre os jogadores e times participantes do Campeonato Brasileiro de 2025. A plataforma é dividida em três páginas principais, cada uma com funcionalidades específicas para facilitar o acesso aos dados e a navegação do usuário.
+Este site de notícias esportivas foi criado para oferecer uma experiência completa, moderna e visualmente atraente para os apaixonados por esportes. Com um design elegante e intuitivo, o site é organizado em seções dedicadas aos principais esportes, permitindo que o usuário encontre rapidamente o conteúdo que mais lhe interessa.
 
-Na primeira página, o usuário encontrará a tabela atualizada do Brasileirão 2025, exibindo a classificação completa com pontos, vitórias, empates, derrotas e saldo de gols. Também estará disponível o calendário de jogos, com as rodadas já realizadas e as que ainda vão acontecer, mostrando datas, horários e confrontos. Além disso, haverá uma barra de pesquisa que permitirá buscar diretamente por jogadores ou times, facilitando o acesso a informações específicas.
+As principais categorias do site são:
 
-A segunda página será focada na liderança de estatísticas individuais. Nela, serão destacados os jogadores com os melhores desempenhos do campeonato em diferentes categorias, como: quem fez mais gols, quem deu mais assistências, quem realizou mais desarmes, quem recebeu mais cartões amarelos e vermelhos, além dos melhores goleiros do torneio (considerando critérios como número de defesas e jogos sem sofrer gols). Assim como na primeira página, também haverá um filtro de busca para selecionar um jogador ou time específico e visualizar seus dados detalhados.
+Futebol: Notícias atualizadas sobre campeonatos nacionais e internacionais, resultados das rodadas, análises de partidas, transferências, bastidores dos clubes e destaques individuais dos jogadores. Também inclui conteúdo exclusivo sobre o Brasileirão, Champions League, Libertadores e muito mais.
 
-Na terceira e última página, o usuário terá acesso ao painel de confronto direto, onde poderá escolher dois times e visualizar os últimos cinco jogos entre eles, com informações como placar, data e local das partidas. Essa página também contará com o filtro de busca, permitindo pesquisar rapidamente por qualquer jogador ou equipe e acessar seus dados, estatísticas e confrontos recentes.
+Basquete: Cobertura completa da NBA, NBB e outras ligas pelo mundo. Análises táticas, estatísticas, destaques das partidas, informações sobre jogadores em ascensão e movimentações no mercado.
 
-Em todas as páginas do site, haverá um sistema de pesquisa inteligente, que possibilita buscar por jogadores ou times e visualizar suas estatísticas, histórico de jogos e desempenho de forma prática e organizada. O objetivo do projeto é oferecer uma visão clara, interativa e acessível de tudo o que acontece no Brasileirão 2025, tanto para fãs quanto para analistas e curiosos.
+Vôlei: Notícias sobre as principais competições nacionais e internacionais, como Superliga, Liga das Nações e Olimpíadas. Acompanhamento de jogos, desempenho de seleções e atletas, além de entrevistas exclusivas com os protagonistas do esporte.
+
+Fórmula 1: Cobertura detalhada de todas as etapas da temporada. Treinos, classificações, corridas e bastidores das equipes. Atualizações sobre os pilotos, desempenho dos carros e análise técnica dos GPs.
+
+Cada seção conta com um layout próprio, otimizando a navegação e destacando as principais manchetes com imagens de alta qualidade e organização clara. O site também oferece:
+
+Modo escuro e claro, para melhor conforto visual.
+
+Sistema de busca rápida, para encontrar notícias por esporte, campeonato, time ou atleta.
+
+Área de destaques ao vivo, com atualizações em tempo real de partidas e eventos importantes.
+
+Responsivo e mobile-friendly, para uma ótima experiência em qualquer dispositivo.
+
+Nosso objetivo é ser o ponto de encontro dos fãs de esportes, oferecendo informação confiável, conteúdo de qualidade e uma navegação que une agilidade e estética.
