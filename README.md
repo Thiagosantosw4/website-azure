@@ -9,6 +9,21 @@ Basquete: Cobertura completa da NBA, NBB e outras ligas pelo mundo. Análises t�
 
 Vôlei: Notícias sobre as principais competições nacionais e internacionais, como Superliga, Liga das Nações e Olimpíadas. Acompanhamento de jogos, desempenho de seleções e atletas, além de entrevistas exclusivas com os protagonistas do esporte.
 
+<<<<<<< HEAD
+Fórmula 1: Cobertura detalhada de todas as etapas da temporada. Treinos, classificações, corridas e bastidores das equipes. Atualizações sobre os pilotos, desempenho dos carros e análise técnica dos GPs.
+
+Cada seção conta com um layout próprio, otimizando a navegação e destacando as principais manchetes com imagens de alta qualidade e organização clara. O site também oferece:
+
+Modo escuro e claro, para melhor conforto visual.
+
+Sistema de busca rápida, para encontrar notícias por esporte, campeonato, time ou atleta.
+
+Área de destaques ao vivo, com atualizações em tempo real de partidas e eventos importantes.
+
+Responsivo e mobile-friendly, para uma ótima experiência em qualquer dispositivo.
+
+Nosso objetivo é ser o ponto de encontro dos fãs de esportes, oferecendo informação confiável, conteúdo de qualidade e uma navegação que une agilidade e estética.
+=======
 Fórmula 1: Cobertura detalhada de todas as etapas da temporada. Treinos, classificações, corridas e bastidores das equipes. Atualizações sobre os pilotos, desempenho dos carros e análise técnica dos GPs.
 
 Cada seção conta com um layout próprio, otimizando a navegação e destacando as principais manchetes com imagens de alta qualidade e organização clara. O site também oferece:

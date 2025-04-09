@@ -1,109 +1,140 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brasileirão 2025</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notícias Esportivas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
     }
     header {
-      background-color: #005a2c;
-      color: white;
-      padding: 20px;
+      background-color: #1f1b2e;
+      color: #bb86fc;
+      padding: 1rem 2rem;
       text-align: center;
     }
     nav {
-      background-color: #007f3f;
       display: flex;
       justify-content: center;
-      padding: 10px;
+      background-color: #2a2640;
     }
     nav a {
-      color: white;
+      color: #bb86fc;
+      padding: 1rem;
       text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+      transition: background 0.3s;
     }
     nav a:hover {
-      text-decoration: underline;
+      background-color: #3b3660;
     }
-    .container {
-      padding: 20px;
+    .section {
+      padding: 2rem;
     }
-    .search-bar {
-      margin-bottom: 20px;
+    .section h2 {
+      margin-bottom: 1rem;
+      color: #bb86fc;
     }
-    .search-bar input {
-      padding: 10px;
-      width: 100%;
-      max-width: 400px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .news-card {
+      background: #1f1b2e;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      padding: 1rem;
+      margin-bottom: 1rem;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
+    footer {
+      background-color: #1f1b2e;
+      color: #bb86fc;
       text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      position: relative;
     }
-    th {
-      background-color: #007f3f;
-      color: white;
+    .credits {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      font-size: 0.9rem;
+      color: #bb86fc;
+      background-color: #2a2640;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Campeonato Brasileiro 2025</h1>
+    <h1>Notícias Esportivas</h1>
+    <p>Futebol • Basquete • Vôlei • Fórmula 1</p>
   </header>
   <nav>
-    <a href="#classificacao">Classificação</a>
-    <a href="#estatisticas">Estatísticas</a>
-    <a href="#confrontos">Confrontos</a>
+    <a href="#futebol">Futebol</a>
+    <a href="#basquete">Basquete</a>
+    <a href="#volei">Vôlei</a>
+    <a href="#f1">Fórmula 1</a>
   </nav>
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar por jogador ou time...">
+
+  <section id="futebol" class="section">
+    <h2>Futebol</h2>
+    <div class="news-card">
+      <strong>PSG 0 x 0 ASV</strong> - Paris Saint-Germain x Aston Villa - Liga dos Campeões 2024/2025 - Ao vivo - globoesporte.com
     </div>
+    <div class="news-card">
+      <strong>BAR 1 x 0 BRD</strong> - Barcelona x Borussia Dortmund - Liga dos Campeões 2024/2025 - Ao vivo - globoesporte.com
+    </div>
+    <div class="news-card">
+      Operário-PR pega o Vasco na terceira fase da Copa do Brasil; histórico do duelo é equilibrado
+    </div>
+    <div class="news-card">
+      Médico se surpreende com indicador de força na recuperação de Pedro no Flamengo: "Raríssimo"
+    </div>
+  </section>
 
-    <section id="classificacao">
-      <h2>Tabela de Classificação</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Posição</th>
-            <th>Time</th>
-            <th>Pontos</th>
-            <th>Vitórias</th>
-            <th>Empates</th>
-            <th>Derrotas</th>
-            <th>Saldo de Gols</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Dados dos times aqui -->
-        </tbody>
-      </table>
-    </section>
+  <section id="volei" class="section">
+    <h2>Vôlei</h2>
+    <div class="news-card">Darlan brilha e Sesi-Bauru supera Praia Clube em 1º confronto dos playoffs</div>
+    <div class="news-card">Minas vence Suzano e larga com vantagem nas quartas da Superliga Masculina</div>
+    <div class="news-card">Superliga Feminina 2024/25: Confira a tabela das quartas de final</div>
+    <div class="news-card">Superliga Masculina 2024/25: Confira a tabela das quartas de final</div>
+    <div class="news-card">Superliga Masculina: raio-x das equipes e como chegam aos playoffs</div>
+    <div class="news-card">De volta à elite após quase 30 anos, Sorocaba teve time histórico</div>
+  </section>
 
-    <section id="estatisticas">
-      <h2>Estatísticas Individuais</h2>
-      <!-- Conteúdo das estatísticas aqui -->
-    </section>
+  <section id="basquete" class="section">
+    <h2>Basquete</h2>
+    <div class="news-card">Steve Kerr brinca em cobrança a Buddy Hield: "Diga 'oi' para Steph..."</div>
+    <div class="news-card">Doncic joga em Dallas pela primeira vez após troca para o Lakers</div>
+    <div class="news-card">Ja Morant faz comemoração imitando granada após ser multado</div>
+    <div class="news-card">LeBron James é primeiro atleta profissional a inspirar boneco Ken</div>
+    <div class="news-card">Sesi Araraquara x Maringá: onde assistir ao jogo pela LBF</div>
+    <div class="news-card">São José encara União Corinthians em confronto direto por vaga no G-8 do NBB</div>
+  </section>
 
-    <section id="confrontos">
-      <h2>Confronto Direto</h2>
-      <!-- Painel de confronto direto aqui -->
-    </section>
-  </div>
+  <section id="f1" class="section">
+    <h2>Fórmula 1</h2>
+    <div class="news-card">Drugovich vai pilotar Aston Martin em treino do GP do Bahrein</div>
+    <div class="news-card">Verstappen brinca sobre a McLaren: "Naquele carro, vocês nem me veriam mais"</div>
+    <div class="news-card">#NaPontadosDedos 240: vitória de Verstappen; papo com Arthur Leist</div>
+    <div class="news-card">Sainz leva multa de R$ 129 mil por atraso após problema estomacal</div>
+    <div class="news-card">Verstappen considera vitória no Japão como indício de reação da RBR</div>
+    <div class="news-card">Imprensa italiana critica início da Ferrari na F1 2025: "Assim não dá"</div>
+    <div class="news-card">RBR vai priorizar título de pilotos da F1 com Verstappen</div>
+    <div class="news-card">Hamilton lamenta ritmo no Japão e revela problema no carro da Ferrari</div>
+    <div class="news-card">Norris exalta Verstappen e nega surpresa com rival na briga por título</div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Notícias Esportivas • Todos os direitos reservados</p>
+  </footer>
+  <div class="credits">Feito e produzido por Thiago Oliveira e Nicolas Tavares</div>
 </body>
 </html>
