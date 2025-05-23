@@ -1,140 +1,965 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notícias Esportivas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-    body {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    header {
-      background-color: #1f1b2e;
-      color: #bb86fc;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #2a2640;
-    }
-    nav a {
-      color: #bb86fc;
-      padding: 1rem;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    nav a:hover {
-      background-color: #3b3660;
-    }
-    .section {
-      padding: 2rem;
-    }
-    .section h2 {
-      margin-bottom: 1rem;
-      color: #bb86fc;
-    }
-    .news-card {
-      background: #1f1b2e;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    footer {
-      background-color: #1f1b2e;
-      color: #bb86fc;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      position: relative;
-    }
-    .credits {
-      position: fixed;
-      right: 10px;
-      bottom: 10px;
-      font-size: 0.9rem;
-      color: #bb86fc;
-      background-color: #2a2640;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EkoVision - O mundo em som</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#f5d77f',
+                            DEFAULT: '#d4af37',
+                            dark: '#b8860b',
+                        },
+                        dark: {
+                            light: '#2d2d2d',
+                            DEFAULT: '#1a1a1a',
+                            darker: '#121212',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b8860b 100%);
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .clip-path-slant-reverse {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .perspective-container {
+            perspective: 1000px;
+        }
+        
+        .rotate-y-animation {
+            animation: rotateY 8s infinite linear;
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes rotateY {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .gold-button {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .gold-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .gold-button:hover::before {
+            left: 100%;
+        }
+        
+        .glasses-svg {
+            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3));
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Notícias Esportivas</h1>
-    <p>Futebol • Basquete • Vôlei • Fórmula 1</p>
-  </header>
-  <nav>
-    <a href="#futebol">Futebol</a>
-    <a href="#basquete">Basquete</a>
-    <a href="#volei">Vôlei</a>
-    <a href="#f1">Fórmula 1</a>
-  </nav>
+<body class="bg-dark-darker text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-dark-darker bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2">
+                <svg class="w-10 h-10" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- New Logo: Stylized E with sound wave -->
+                    <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Sound wave element -->
+                    <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="text-xl font-bold text-gold">EkoVision</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-gold transition-colors">Início</a>
+                <a href="#problem" class="nav-link text-white hover:text-gold transition-colors">O Problema</a>
+                <a href="#solution" class="nav-link text-white hover:text-gold transition-colors">A Solução</a>
+                <a href="#simulation" class="nav-link text-white hover:text-gold transition-colors">Simulação</a>
+                <a href="#team" class="nav-link text-white hover:text-gold transition-colors">Equipe</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-darker border-t border-gold-dark">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
+                <a href="#problem" class="text-white hover:text-gold transition-colors">O Problema</a>
+                <a href="#solution" class="text-white hover:text-gold transition-colors">A Solução</a>
+                <a href="#simulation" class="text-white hover:text-gold transition-colors">Simulação</a>
+                <a href="#team" class="text-white hover:text-gold transition-colors">Equipe</a>
+            </div>
+        </div>
+    </nav>
 
-  <section id="futebol" class="section">
-    <h2>Futebol</h2>
-    <div class="news-card">
-      <strong>PSG 0 x 0 ASV</strong> - Paris Saint-Germain x Aston Villa - Liga dos Campeões 2024/2025 - Ao vivo - globoesporte.com
-    </div>
-    <div class="news-card">
-      <strong>BAR 1 x 0 BRD</strong> - Barcelona x Borussia Dortmund - Liga dos Campeões 2024/2025 - Ao vivo - globoesporte.com
-    </div>
-    <div class="news-card">
-      Operário-PR pega o Vasco na terceira fase da Copa do Brasil; histórico do duelo é equilibrado
-    </div>
-    <div class="news-card">
-      Médico se surpreende com indicador de força na recuperação de Pedro no Flamengo: "Raríssimo"
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-dark-darker opacity-90 z-0"></div>
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/10 via-dark-darker to-dark-darker"></div>
+            <div class="h-full w-full flex">
+                <div class="w-1/3 h-full bg-gold/5 transform -skew-x-12 translate-x-20 opacity-30"></div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 py-16 z-10 relative">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                        <span class="text-white">Eko</span><span class="text-gold">Vision</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-light mb-6 text-gold italic">O mundo em som.</h2>
+                    <p class="text-lg mb-8 text-gray-300 max-w-lg">
+                        Revolucionando a experiência de pessoas com deficiência visual através de óculos inteligentes que descrevem o mundo ao redor com precisão e elegância.
+                    </p>
+                    <a href="#solution" class="inline-block gold-button bg-gold text-dark-darker font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gold-dark transition-all duration-300 transform hover:-translate-y-1">
+                        Saiba mais
+                    </a>
+                </div>
+                
+                <div class="md:w-1/2 perspective-container">
+                    <div class="animate-float">
+                        <!-- New Ray-Ban style glasses -->
+                        <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Frame Top Bar -->
+                            <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                            
+                            <!-- Frame Front -->
+                            <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            
+                            <!-- Bridge -->
+                            <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                            
+                            <!-- Lenses (Dark) -->
+                            <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                            <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                            
+                            <!-- Temple Arms -->
+                            <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                            <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                            
+                            <!-- Mini Camera (top right corner) -->
+                            <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                            <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                            <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                            
+                            <!-- Mini Speakers on Temple Arms -->
+                            <!-- Left Speaker -->
+                            <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                            <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                            
+                            <!-- Right Speaker -->
+                            <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                            <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                            
+                            <!-- Subtle Ray-Ban style logo hint on temple -->
+                            <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                            
+                            <!-- Reflection on lenses -->
+                            <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                            <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#problem" aria-label="Rolar para baixo">
+                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
 
-  <section id="volei" class="section">
-    <h2>Vôlei</h2>
-    <div class="news-card">Darlan brilha e Sesi-Bauru supera Praia Clube em 1º confronto dos playoffs</div>
-    <div class="news-card">Minas vence Suzano e larga com vantagem nas quartas da Superliga Masculina</div>
-    <div class="news-card">Superliga Feminina 2024/25: Confira a tabela das quartas de final</div>
-    <div class="news-card">Superliga Masculina 2024/25: Confira a tabela das quartas de final</div>
-    <div class="news-card">Superliga Masculina: raio-x das equipes e como chegam aos playoffs</div>
-    <div class="news-card">De volta à elite após quase 30 anos, Sorocaba teve time histórico</div>
-  </section>
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 bg-dark-light clip-path-slant relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                    <span class="relative inline-block">
+                        <span class="text-gold">O Problema</span>
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                    </span>
+                </h2>
+                
+                <div class="bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
+                    <div class="flex flex-col md:flex-row items-center mb-10">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="w-32 h-32 rounded-full bg-dark-light border-2 border-gold flex items-center justify-center">
+                                <i class="fas fa-eye-slash text-5xl text-gold"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gold">Desafios diários enfrentados</h3>
+                            <p class="text-gray-300 mb-4">
+                                Pessoas com deficiência visual enfrentam obstáculos significativos ao navegar em ambientes cotidianos, especialmente em locais com muitas informações visuais.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-shopping-cart text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Supermercados</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Identificar produtos, preços e informações nutricionais torna-se uma tarefa quase impossível sem assistência.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-pills text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Farmácias</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Diferenciar medicamentos, ler bulas e instruções de dosagem representa um desafio crítico para a saúde.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-city text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Espaços Públicos</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Navegar em ruas, identificar estabelecimentos e ler placas informativas são barreiras constantes à autonomia.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-dark-light p-6 rounded-lg border border-gold/30">
+                        <h4 class="text-xl font-semibold mb-4 text-gold">Impacto na Independência</h4>
+                        <p class="text-gray-300">
+                            A falta de acesso a informações visuais limita significativamente a autonomia e independência das pessoas com deficiência visual, criando uma dependência constante de terceiros para tarefas cotidianas que poderiam ser realizadas de forma independente com a tecnologia adequada.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
+            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
+                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
+            </svg>
+        </div>
+    </section>
 
-  <section id="basquete" class="section">
-    <h2>Basquete</h2>
-    <div class="news-card">Steve Kerr brinca em cobrança a Buddy Hield: "Diga 'oi' para Steph..."</div>
-    <div class="news-card">Doncic joga em Dallas pela primeira vez após troca para o Lakers</div>
-    <div class="news-card">Ja Morant faz comemoração imitando granada após ser multado</div>
-    <div class="news-card">LeBron James é primeiro atleta profissional a inspirar boneco Ken</div>
-    <div class="news-card">Sesi Araraquara x Maringá: onde assistir ao jogo pela LBF</div>
-    <div class="news-card">São José encara União Corinthians em confronto direto por vaga no G-8 do NBB</div>
-  </section>
+    <!-- Solution Section -->
+    <section id="solution" class="py-20 bg-dark-darker relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">A Solução</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="perspective-container">
+                        <div class="animate-float">
+                            <!-- New Ray-Ban style glasses -->
+                            <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Frame Top Bar -->
+                                <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                                
+                                <!-- Frame Front -->
+                                <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Bridge -->
+                                <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Lenses (Dark) -->
+                                <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Temple Arms -->
+                                <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                                <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                                
+                                <!-- Mini Camera (top right corner) -->
+                                <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                                <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                                
+                                <!-- Mini Speakers on Temple Arms -->
+                                <!-- Left Speaker -->
+                                <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Right Speaker -->
+                                <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Subtle Ray-Ban style logo hint on temple -->
+                                <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                                
+                                <!-- Reflection on lenses -->
+                                <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                
+                                <!-- AI Visualization -->
+                                <circle cx="200" cy="80" r="15" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+                                <path d="M185 80 L215 80 M200 65 L200 95" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 md:pl-10">
+                    <h3 class="text-2xl font-bold mb-6 text-gold">Apresentando o EkoVision</h3>
+                    <p class="text-gray-300 mb-6">
+                        O EkoVision é um óculos de sol inteligente projetado especificamente para pessoas com deficiência visual, combinando tecnologia avançada com um design elegante e discreto.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Nosso dispositivo transforma informações visuais em descrições de áudio precisas, permitindo que os usuários "enxerguem" o mundo através do som, proporcionando maior independência e confiança no dia a dia.
+                    </p>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-tag text-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-white">Preço acessível</h4>
+                            <p class="text-gold font-bold">R$ 1.499,00</p>
+                            <p class="text-sm text-gray-400">Parcelamento em até 12x sem juros</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-camera text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Câmera HD</h4>
+                    <p class="text-gray-300 text-center">
+                        Câmera de alta definição posicionada no canto superior direito da armação, capturando imagens do ambiente com precisão.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-brain text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">IA Avançada</h4>
+                    <p class="text-gray-300 text-center">
+                        Inteligência artificial que identifica objetos, textos, pessoas e ambientes, processando informações em tempo real.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-volume-up text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Som Direcional</h4>
+                    <p class="text-gray-300 text-center">
+                        Micro caixas de som embutidas nas hastes do óculos, proporcionando áudio claro sem bloquear sons ambientais importantes.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fab fa-bluetooth-b text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Conectividade</h4>
+                    <p class="text-gray-300 text-center">
+                        Conexão Bluetooth com o smartphone do usuário, permitindo processamento avançado e acesso à internet.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20">
+                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Como Funciona a Conectividade</h3>
+                
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <div class="relative">
+                            <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Glasses (Ray-Ban Style) -->
+                                <path d="M120 150 H280" stroke="#d4af37" stroke-width="2.5" class="animate-pulse-slow"/>
+                                
+                                <!-- Frame Front -->
+                                <path d="M120 150 L100 160 L100 180 C100 185, 105 190, 110 190 L150 190 C155 190, 160 185, 160 180 L160 160 L120 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                <path d="M280 150 L300 160 L300 180 C300 185, 295 190, 290 190 L250 190 C245 190, 240 185, 240 180 L240 160 L280 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Bridge -->
+                                <path d="M160 165 C180 160, 220 160, 240 165" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Lenses (Dark) -->
+                                <path d="M110 160 L150 160 L150 180 C150 182, 148 184, 146 184 L114 184 C112 184, 110 182, 110 180 L110 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M250 160 L290 160 L290 180 C290 182, 288 184, 286 184 L254 184 C252 184, 250 182, 250 180 L250 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                
+                                <!-- Temple Arms -->
+                                <path d="M100 170 L80 175" stroke="#d4af37" stroke-width="2"/>
+                                <path d="M300 170 L320 175" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Mini Camera -->
+                                <circle cx="290" cy="155" r="4" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <circle cx="290" cy="155" r="2" fill="#d4af37"/>
+                                <circle cx="290" cy="155" r="0.7" fill="#ffffff"/>
+                                
+                                <!-- Mini Speakers -->
+                                <rect x="85" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
+                                <rect x="307" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Smartphone -->
+                                <rect x="180" y="200" width="40" height="70" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <rect x="185" y="205" width="30" height="50" rx="2" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                <circle cx="200" cy="265" r="3" fill="#d4af37"/>
+                                
+                                <!-- Cloud -->
+                                <path d="M200 80 C220 50, 260 50, 270 80 C290 80, 310 100, 290 120 C300 140, 280 160, 260 150 C250 170, 210 170, 200 150 C180 160, 160 140, 170 120 C150 100, 170 80, 200 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <text x="200" y="120" text-anchor="middle" fill="#d4af37" font-size="14">AI Cloud</text>
+                                
+                                <!-- Connection Lines -->
+                                <path d="M150 170 C160 180, 180 190, 180 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                <path d="M250 170 C240 180, 220 190, 220 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                <path d="M200 200 C200 180, 200 160, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                
+                                <path d="M200 80 C200 100, 200 120, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                
+                                <!-- Bluetooth Icon -->
+                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 195 L190 185 L200 175 L200 195" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                                
+                                <!-- WiFi Icon -->
+                                <path d="M190 100 C195 95, 205 95, 210 100" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M193 105 C197 101, 203 101, 207 105" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M196 110 C198 108, 202 108, 204 110" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="200" cy="115" r="1.5" fill="#d4af37"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">1</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    O EkoVision conecta-se ao smartphone do usuário via <span class="text-gold">Bluetooth</span>, criando uma ponte de comunicação estável e de baixo consumo energético.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">2</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    A câmera do óculos captura imagens do ambiente e as envia para o aplicativo EkoVision instalado no smartphone.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">3</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    O aplicativo utiliza a conexão de internet do celular para enviar as imagens para nossa <span class="text-gold">IA na nuvem</span>, onde são processadas e interpretadas.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">4</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    As descrições geradas são enviadas de volta ao smartphone e transmitidas para as caixas de som do óculos, proporcionando feedback imediato ao usuário.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">5</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    Todo o processo ocorre em <span class="text-gold">tempo real</span>, com latência mínima, garantindo uma experiência fluida e natural para o usuário.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="f1" class="section">
-    <h2>Fórmula 1</h2>
-    <div class="news-card">Drugovich vai pilotar Aston Martin em treino do GP do Bahrein</div>
-    <div class="news-card">Verstappen brinca sobre a McLaren: "Naquele carro, vocês nem me veriam mais"</div>
-    <div class="news-card">#NaPontadosDedos 240: vitória de Verstappen; papo com Arthur Leist</div>
-    <div class="news-card">Sainz leva multa de R$ 129 mil por atraso após problema estomacal</div>
-    <div class="news-card">Verstappen considera vitória no Japão como indício de reação da RBR</div>
-    <div class="news-card">Imprensa italiana critica início da Ferrari na F1 2025: "Assim não dá"</div>
-    <div class="news-card">RBR vai priorizar título de pilotos da F1 com Verstappen</div>
-    <div class="news-card">Hamilton lamenta ritmo no Japão e revela problema no carro da Ferrari</div>
-    <div class="news-card">Norris exalta Verstappen e nega surpresa com rival na briga por título</div>
-  </section>
+    <!-- Simulation Section -->
+    <section id="simulation" class="py-20 bg-dark-light clip-path-slant-reverse relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">Simulação</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="max-w-4xl mx-auto bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
+                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Dashboard Interativo</h3>
+                <p class="text-gray-300 mb-8 text-center">
+                    Experimente como o EkoVision descreve diferentes ambientes. Selecione um cenário e ative a IA para ouvir uma simulação.
+                </p>
+                
+                <div class="flex flex-col md:flex-row items-center mb-8">
+                    <div class="md:w-1/2 mb-6 md:mb-0 flex justify-center">
+                        <div class="perspective-container">
+                            <div id="glasses-container" class="animate-float">
+                                <!-- New Ray-Ban style glasses -->
+                                <svg class="w-64 h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Frame Top Bar -->
+                                    <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                                    
+                                    <!-- Frame Front -->
+                                    <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                    <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                    
+                                    <!-- Bridge -->
+                                    <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                                    
+                                    <!-- Lenses (Dark) -->
+                                    <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                    <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                    
+                                    <!-- Temple Arms -->
+                                    <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                                    <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                                    
+                                    <!-- Mini Camera (top right corner) -->
+                                    <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                    <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                                    <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                                    
+                                    <!-- Mini Speakers on Temple Arms -->
+                                    <!-- Left Speaker -->
+                                    <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                    <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                                    
+                                    <!-- Right Speaker -->
+                                    <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                    <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                                    
+                                    <!-- Subtle Ray-Ban style logo hint on temple -->
+                                    <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                                    
+                                    <!-- Reflection on lenses -->
+                                    <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                    <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                    
+                                    <!-- Camera Active Indicator (hidden by default) -->
+                                    <circle id="camera-indicator" cx="310" cy="90" r="10" fill="#d4af37" fill-opacity="0.3" style="display: none;"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="mb-6">
+                            <label for="scenario" class="block text-gold font-medium mb-2">Selecione o cenário:</label>
+                            <select id="scenario" class="w-full bg-dark-darker border border-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-gold">
+                                <option value="pharmacy">Farmácia</option>
+                                <option value="supermarket">Supermercado</option>
+                                <option value="street">Rua</option>
+                            </select>
+                        </div>
+                        
+                        <button id="activate-ai" class="w-full gold-button bg-gold text-dark-darker font-bold py-4 px-6 rounded-lg shadow-lg hover:bg-gold-dark transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-power-off mr-2"></i>
+                            Ativar IA
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="result-container" class="bg-dark-light p-6 rounded-lg border border-gold/20 mb-8 hidden">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-comment-alt text-gold"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gold">Descrição da IA</h4>
+                    </div>
+                    
+                    <div id="ai-description" class="text-white bg-dark-darker p-4 rounded-lg border border-gold/10 mb-4">
+                        Aguardando ativação...
+                    </div>
+                    
+                    <div class="flex items-center text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-2 text-gold"></i>
+                        <span>Tempo de resposta: <span id="response-time">0.0</span> segundos</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button id="emergency-button" class="gold-button bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        Chamar ajuda
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Notícias Esportivas • Todos os direitos reservados</p>
-  </footer>
-  <div class="credits">Feito e produzido por Thiago Oliveira e Nicolas Tavares</div>
-</body>
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-dark-darker">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">Nossa Equipe</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Thiago Oliveira</h3>
+                        <p class="text-sm text-gold/70 mb-4">CEO e Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Visionário por trás do EkoVision, com experiência em tecnologias assistivas e inovação social.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Vinicius Sampaio</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em inteligência artificial e sistemas de visão computacional.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Vitor Alves</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Responsável pelo design e ergonomia do produto, focado na experiência do usuário.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Luiz Renato</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em desenvolvimento de software e integração de sistemas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-darker py-10 border-t border-gold/20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#home" class="flex items-center space-x-2">
+                        <svg class="w-8 h-8" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- New Logo: Stylized E with sound wave -->
+                            <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Sound wave element -->
+                            <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="text-xl font-bold text-gold">EkoVision</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">O mundo em som.</p>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">&copy; 2023 EkoVision. Todos os direitos reservados.</p>
+                    <p class="text-gray-500 text-sm mt-1">Desenvolvido com ❤️ para acessibilidade</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Simulation Functionality
+        const activateAiButton = document.getElementById('activate-ai');
+        const resultContainer = document.getElementById('result-container');
+        const aiDescription = document.getElementById('ai-description');
+        const responseTime = document.getElementById('response-time');
+        const scenarioSelect = document.getElementById('scenario');
+        const cameraIndicator = document.getElementById('camera-indicator');
+        const glassesContainer = document.getElementById('glasses-container');
+        const emergencyButton = document.getElementById('emergency-button');
+        
+        const descriptions = {
+            pharmacy: "Você está em uma farmácia. À sua frente, na prateleira central, encontra-se o produto: Dipirona 500mg. Preço: R$ 8,99. À direita há uma seção de cosméticos. À esquerda está o balcão de atendimento a aproximadamente 3 metros.",
+            supermarket: "Você está no corredor de cereais de um supermercado. À sua frente está: Arroz Integral Tipo 1. Preço: R$ 22,50 por kg. Promoção: leve 2kg, pague R$ 40,00. Corredor de laticínios à direita a aproximadamente 5 metros.",
+            street: "Você está em uma calçada. À sua frente há uma faixa de pedestres a 2 metros. Semáforo está vermelho para pedestres. Há uma parada de ônibus à direita a aproximadamente 10 metros. Detecto movimento de pessoas atravessando à sua esquerda."
+        };
+        
+        activateAiButton.addEventListener('click', () => {
+            // Show camera active indicator
+            cameraIndicator.style.display = 'block';
+            
+            // Add processing animation to glasses
+            glassesContainer.classList.remove('animate-float');
+            glassesContainer.classList.add('animate-pulse-slow');
+            
+            // Show loading state
+            resultContainer.classList.remove('hidden');
+            aiDescription.textContent = "Processando imagem...";
+            
+            // Simulate processing time
+            const processingTime = Math.random() * (1.5 - 0.8) + 0.8;
+            
+            setTimeout(() => {
+                // Get selected scenario
+                const scenario = scenarioSelect.value;
+                
+                // Update description
+                aiDescription.textContent = descriptions[scenario];
+                responseTime.textContent = processingTime.toFixed(1);
+                
+                // Return glasses to normal state
+                setTimeout(() => {
+                    cameraIndicator.style.display = 'none';
+                    glassesContainer.classList.remove('animate-pulse-slow');
+                    glassesContainer.classList.add('animate-float');
+                }, 1000);
+                
+            }, processingTime * 1000);
+        });
+        
+        emergencyButton.addEventListener('click', () => {
+            // Create emergency modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80';
+            modal.innerHTML = `
+                <div class="bg-dark-light p-8 rounded-xl max-w-md w-full border border-red-500 shadow-2xl">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center animate-pulse">
+                            <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-red-500">Emergência Ativada</h3>
+                    <p class="text-gray-300 mb-6 text-center">
+                        Enviando sua localização atual para seus contatos de emergência.
+                    </p>
+                    <div class="bg-dark-darker p-4 rounded-lg mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Status:</span>
+                            <span class="text-green-500">Localização enviada</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Coordenadas:</span>
+                            <span class="text-white">-23.5505, -46.6333</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Contatos notificados:</span>
+                            <span class="text-white">3</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button id="close-emergency" class="bg-white text-red-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add event listener to close button
+            document.getElementById('close-emergency').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'944572e6867b6eaa',t:'MTc0ODAxMjY5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
