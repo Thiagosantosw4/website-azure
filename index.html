@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -144,17 +143,14 @@
     </style>
 </head>
 <body class="bg-dark-darker text-white">
-    <!-- Navigation -->
     <nav class="fixed w-full bg-dark-darker bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <a href="#home" class="flex items-center space-x-2">
                 <svg class="w-10 h-10" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- New Logo: Stylized E with sound wave -->
                     <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
                     <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
                     <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <!-- Sound wave element -->
                     <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
                     <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
@@ -176,7 +172,6 @@
             </button>
         </div>
         
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-dark-darker border-t border-gold-dark">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
                 <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
@@ -188,7 +183,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
         <div class="absolute inset-0 bg-dark-darker opacity-90 z-0"></div>
         <div class="absolute inset-0 z-0">
@@ -213,49 +207,9 @@
                     </a>
                 </div>
                 
-                <div class="md:w-1/2 perspective-container">
+                <div class="md:w-1/2 perspective-container flex justify-center md:justify-end">
                     <div class="animate-float">
-                        <!-- New Ray-Ban style glasses -->
-                        <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Frame Top Bar -->
-                            <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                            
-                            <!-- Frame Front -->
-                            <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            
-                            <!-- Bridge -->
-                            <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                            
-                            <!-- Lenses (Dark) -->
-                            <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                            <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                            
-                            <!-- Temple Arms -->
-                            <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                            <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                            
-                            <!-- Mini Camera (top right corner) -->
-                            <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                            <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                            <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                            
-                            <!-- Mini Speakers on Temple Arms -->
-                            <!-- Left Speaker -->
-                            <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                            <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                            
-                            <!-- Right Speaker -->
-                            <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                            <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                            
-                            <!-- Subtle Ray-Ban style logo hint on temple -->
-                            <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                            
-                            <!-- Reflection on lenses -->
-                            <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                            <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                        </svg>
+                        <img src="image_09f615.png" alt="Óculos EkoVision" class="w-full h-auto max-w-sm md:max-w-md lg:max-w-lg glasses-image shadow-xl rounded-lg">
                     </div>
                 </div>
             </div>
@@ -270,7 +224,6 @@
         </div>
     </section>
 
-    <!-- Problem Section -->
     <section id="problem" class="py-20 bg-dark-light clip-path-slant relative">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
@@ -351,7 +304,6 @@
         </div>
     </section>
 
-    <!-- Solution Section -->
     <section id="solution" class="py-20 bg-dark-darker relative">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
@@ -365,48 +317,35 @@
                 <div class="md:w-1/2 mb-10 md:mb-0">
                     <div class="perspective-container">
                         <div class="animate-float">
-                            <!-- New Ray-Ban style glasses -->
                             <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Frame Top Bar -->
                                 <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
                                 
-                                <!-- Frame Front -->
                                 <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
                                 <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
                                 
-                                <!-- Bridge -->
                                 <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
                                 
-                                <!-- Lenses (Dark) -->
                                 <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
                                 <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
                                 
-                                <!-- Temple Arms -->
                                 <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
                                 <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
                                 
-                                <!-- Mini Camera (top right corner) -->
                                 <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
                                 <circle cx="310" cy="90" r="3" fill="#d4af37"/>
                                 <circle cx="310" cy="90" r="1" fill="#ffffff"/>
                                 
-                                <!-- Mini Speakers on Temple Arms -->
-                                <!-- Left Speaker -->
                                 <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
                                 <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
                                 
-                                <!-- Right Speaker -->
                                 <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
                                 <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
                                 
-                                <!-- Subtle Ray-Ban style logo hint on temple -->
                                 <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
                                 
-                                <!-- Reflection on lenses -->
                                 <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
                                 <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
                                 
-                                <!-- AI Visualization -->
                                 <circle cx="200" cy="80" r="15" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
                                 <path d="M185 80 L215 80 M200 65 L200 95" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
                             </svg>
@@ -484,229 +423,142 @@
                     <div class="md:w-1/2 mb-8 md:mb-0">
                         <div class="relative">
                             <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Glasses (Ray-Ban Style) -->
                                 <path d="M120 150 H280" stroke="#d4af37" stroke-width="2.5" class="animate-pulse-slow"/>
                                 
-                                <!-- Frame Front -->
                                 <path d="M120 150 L100 160 L100 180 C100 185, 105 190, 110 190 L150 190 C155 190, 160 185, 160 180 L160 160 L120 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
                                 <path d="M280 150 L300 160 L300 180 C300 185, 295 190, 290 190 L250 190 C245 190, 240 185, 240 180 L240 160 L280 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
                                 
-                                <!-- Bridge -->
                                 <path d="M160 165 C180 160, 220 160, 240 165" stroke="#d4af37" stroke-width="1.5"/>
                                 
-                                <!-- Lenses (Dark) -->
                                 <path d="M110 160 L150 160 L150 180 C150 182, 148 184, 146 184 L114 184 C112 184, 110 182, 110 180 L110 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
                                 <path d="M250 160 L290 160 L290 180 C290 182, 288 184, 286 184 L254 184 C252 184, 250 182, 250 180 L250 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
                                 
-                                <!-- Temple Arms -->
                                 <path d="M100 170 L80 175" stroke="#d4af37" stroke-width="2"/>
                                 <path d="M300 170 L320 175" stroke="#d4af37" stroke-width="2"/>
                                 
-                                <!-- Mini Camera -->
                                 <circle cx="290" cy="155" r="4" fill="#121212" stroke="#d4af37" stroke-width="1"/>
                                 <circle cx="290" cy="155" r="2" fill="#d4af37"/>
                                 <circle cx="290" cy="155" r="0.7" fill="#ffffff"/>
                                 
-                                <!-- Mini Speakers -->
                                 <rect x="85" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
                                 <rect x="307" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
                                 
-                                <!-- Smartphone -->
                                 <rect x="180" y="200" width="40" height="70" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
                                 <rect x="185" y="205" width="30" height="50" rx="2" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
                                 <circle cx="200" cy="265" r="3" fill="#d4af37"/>
                                 
-                                <!-- Cloud -->
                                 <path d="M200 80 C220 50, 260 50, 270 80 C290 80, 310 100, 290 120 C300 140, 280 160, 260 150 C250 170, 210 170, 200 150 C180 160, 160 140, 170 120 C150 100, 170 80, 200 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
                                 <text x="200" y="120" text-anchor="middle" fill="#d4af37" font-size="14">AI Cloud</text>
                                 
-                                <!-- Connection Lines -->
                                 <path d="M150 170 C160 180, 180 190, 180 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
                                 <path d="M250 170 C240 180, 220 190, 220 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
                                 <path d="M200 200 C200 180, 200 160, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
                                 
                                 <path d="M200 80 C200 100, 200 120, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
                                 
-                                <!-- Bluetooth Icon -->
-                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 195 L190 185 L200 175 L200 195" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-                                
-                                <!-- WiFi Icon -->
-                                <path d="M190 100 C195 95, 205 95, 210 100" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M193 105 C197 101, 203 101, 207 105" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M196 110 C198 108, 202 108, 204 110" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <circle cx="200" cy="115" r="1.5" fill="#d4af37"/>
+                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 215" stroke="#d4af37" stroke-width="2" class="animate-pulse-slow"/>
                             </svg>
                         </div>
                     </div>
                     
-                    <div class="md:w-1/2 md:pl-8">
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">1</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    O EkoVision conecta-se ao smartphone do usuário via <span class="text-gold">Bluetooth</span>, criando uma ponte de comunicação estável e de baixo consumo energético.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">2</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    A câmera do óculos captura imagens do ambiente e as envia para o aplicativo EkoVision instalado no smartphone.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">3</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    O aplicativo utiliza a conexão de internet do celular para enviar as imagens para nossa <span class="text-gold">IA na nuvem</span>, onde são processadas e interpretadas.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">4</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    As descrições geradas são enviadas de volta ao smartphone e transmitidas para as caixas de som do óculos, proporcionando feedback imediato ao usuário.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">5</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    Todo o processo ocorre em <span class="text-gold">tempo real</span>, com latência mínima, garantindo uma experiência fluida e natural para o usuário.
-                                </p>
-                            </div>
-                        </div>
+                    <div class="md:w-1/2 md:pl-10">
+                        <ul class="list-disc list-inside text-gray-300 space-y-4">
+                            <li>
+                                <span class="font-semibold text-gold">Câmera Capta:</span> A câmera nos óculos captura o ambiente ao redor do usuário.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-gold">Envio ao Smartphone:</span> As imagens são enviadas em tempo real via Bluetooth para o smartphone conectado.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-gold">Processamento na Nuvem (Smartphone/IA):</span> O smartphone, com sua capacidade de processamento e conexão à internet, envia as imagens para a inteligência artificial na nuvem para análise avançada. Isso permite o uso de modelos de IA mais robustos e atualizados, sem depender exclusivamente do hardware do óculos.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-gold">Retorno da Descrição:</span> A IA processa as imagens e retorna uma descrição de áudio detalhada para o smartphone.
+                            </li>
+                            <li>
+                                <span class="font-semibold text-gold">Áudio para o Usuário:</span> O smartphone retransmite a descrição de áudio para os micro alto-falantes nas hastes dos óculos, permitindo que o usuário ouça o que está ao seu redor de forma clara e contextualizada.
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
+            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
+                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
+            </svg>
+        </div>
     </section>
 
-    <!-- Simulation Section -->
-    <section id="simulation" class="py-20 bg-dark-light clip-path-slant-reverse relative">
+    <section id="simulation" class="py-20 bg-dark-light relative">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
                 <span class="relative inline-block">
-                    <span class="text-gold">Simulação</span>
+                    <span class="text-gold">Simulação de Uso</span>
                     <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
                 </span>
             </h2>
             
             <div class="max-w-4xl mx-auto bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
-                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Dashboard Interativo</h3>
-                <p class="text-gray-300 mb-8 text-center">
-                    Experimente como o EkoVision descreve diferentes ambientes. Selecione um cenário e ative a IA para ouvir uma simulação.
+                <p class="text-lg text-gray-300 mb-8 text-center">
+                    Imagine a seguinte situação com o EkoVision em ação:
                 </p>
                 
-                <div class="flex flex-col md:flex-row items-center mb-8">
-                    <div class="md:w-1/2 mb-6 md:mb-0 flex justify-center">
-                        <div class="perspective-container">
-                            <div id="glasses-container" class="animate-float">
-                                <!-- New Ray-Ban style glasses -->
-                                <svg class="w-64 h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <!-- Frame Top Bar -->
-                                    <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                                    
-                                    <!-- Frame Front -->
-                                    <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                    <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                    
-                                    <!-- Bridge -->
-                                    <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                                    
-                                    <!-- Lenses (Dark) -->
-                                    <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                    <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                    
-                                    <!-- Temple Arms -->
-                                    <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                                    <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                                    
-                                    <!-- Mini Camera (top right corner) -->
-                                    <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                    <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                                    <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                                    
-                                    <!-- Mini Speakers on Temple Arms -->
-                                    <!-- Left Speaker -->
-                                    <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                    <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                                    
-                                    <!-- Right Speaker -->
-                                    <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                    <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                                    
-                                    <!-- Subtle Ray-Ban style logo hint on temple -->
-                                    <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                                    
-                                    <!-- Reflection on lenses -->
-                                    <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                    <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                    
-                                    <!-- Camera Active Indicator (hidden by default) -->
-                                    <circle id="camera-indicator" cx="310" cy="90" r="10" fill="#d4af37" fill-opacity="0.3" style="display: none;"/>
-                                </svg>
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
+                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
+                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
+                                <i class="fas fa-store text-3xl text-gold"></i>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 md:pl-8">
-                        <div class="mb-6">
-                            <label for="scenario" class="block text-gold font-medium mb-2">Selecione o cenário:</label>
-                            <select id="scenario" class="w-full bg-dark-darker border border-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-gold">
-                                <option value="pharmacy">Farmácia</option>
-                                <option value="supermarket">Supermercado</option>
-                                <option value="street">Rua</option>
-                            </select>
+                        <div class="md:w-3/4 md:pl-6">
+                            <h3 class="text-xl font-semibold mb-2 text-gold">No Supermercado:</h3>
+                            <p class="text-gray-300">
+                                Ao passar por um corredor, o EkoVision descreve: "À sua direita, prateleira de laticínios. Há iogurte, leite e queijos. O leite integral está no segundo nicho, a R$ 5,99."
+                            </p>
                         </div>
-                        
-                        <button id="activate-ai" class="w-full gold-button bg-gold text-dark-darker font-bold py-4 px-6 rounded-lg shadow-lg hover:bg-gold-dark transition-all duration-300 flex items-center justify-center">
-                            <i class="fas fa-power-off mr-2"></i>
-                            Ativar IA
-                        </button>
                     </div>
-                </div>
-                
-                <div id="result-container" class="bg-dark-light p-6 rounded-lg border border-gold/20 mb-8 hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                            <i class="fas fa-comment-alt text-gold"></i>
+                    
+                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
+                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
+                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
+                                <i class="fas fa-road text-3xl text-gold"></i>
+                            </div>
                         </div>
-                        <h4 class="text-xl font-semibold text-gold">Descrição da IA</h4>
+                        <div class="md:w-3/4 md:pl-6">
+                            <h3 class="text-xl font-semibold mb-2 text-gold">Na Rua:</h3>
+                            <p class="text-gray-300">
+                                Enquanto caminha, o óculos informa: "Você está se aproximando de uma faixa de pedestres. Um carro está parado à sua esquerda. Há um café à sua direita, 'Café Aurora'."
+                            </p>
+                        </div>
                     </div>
                     
-                    <div id="ai-description" class="text-white bg-dark-darker p-4 rounded-lg border border-gold/10 mb-4">
-                        Aguardando ativação...
+                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
+                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
+                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
+                                <i class="fas fa-book-open text-3xl text-gold"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 md:pl-6">
+                            <h3 class="text-xl font-semibold mb-2 text-gold">Lendo um Documento:</h3>
+                            <p class="text-gray-300">
+                                Ao apontar para uma folha de papel, o EkoVision lê: "É um contrato de aluguel. A data de início é 15 de maio de 2024. O valor mensal é de R$ 1.200."
+                            </p>
+                        </div>
                     </div>
-                    
-                    <div class="flex items-center text-sm text-gray-400">
-                        <i class="fas fa-info-circle mr-2 text-gold"></i>
-                        <span>Tempo de resposta: <span id="response-time">0.0</span> segundos</span>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center">
-                    <button id="emergency-button" class="gold-button bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>
-                        Chamar ajuda
-                    </button>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
+            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
+                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
+            </svg>
+        </div>
     </section>
 
-    <!-- Team Section -->
-    <section id="team" class="py-20 bg-dark-darker">
+    <section id="team" class="py-20 bg-dark-darker relative">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
                 <span class="relative inline-block">
@@ -715,251 +567,88 @@
                 </span>
             </h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Thiago Oliveira</h3>
-                        <p class="text-sm text-gold/70 mb-4">CEO e Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Visionário por trás do EkoVision, com experiência em tecnologias assistivas e inovação social.
-                        </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
+                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 1" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
+                    <h3 class="text-2xl font-bold text-gold mb-2">João Silva</h3>
+                    <p class="text-gray-300 mb-4">Líder de Projeto</p>
+                    <p class="text-gray-400 text-sm">
+                        Engenheiro de software com paixão por IA e acessibilidade. Lidera a visão e estratégia do EkoVision.
+                    </p>
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-github text-xl"></i></a>
                     </div>
                 </div>
                 
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Vinicius Sampaio</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Especialista em inteligência artificial e sistemas de visão computacional.
-                        </p>
+                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
+                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 2" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
+                    <h3 class="text-2xl font-bold text-gold mb-2">Maria Oliveira</h3>
+                    <p class="text-gray-300 mb-4">Designer de Produto</p>
+                    <p class="text-gray-400 text-sm">
+                        Especialista em UX/UI, focada em criar interfaces intuitivas e um design ergonômico para os óculos.
+                    </p>
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-behance text-xl"></i></a>
                     </div>
                 </div>
                 
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Vitor Alves</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Responsável pelo design e ergonomia do produto, focado na experiência do usuário.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Luiz Renato</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Especialista em desenvolvimento de software e integração de sistemas.
-                        </p>
+                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
+                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 3" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
+                    <h3 class="text-2xl font-bold text-gold mb-2">Pedro Santos</h3>
+                    <p class="text-gray-300 mb-4">Desenvolvedor de IA</p>
+                    <p class="text-gray-400 text-sm">
+                        Cientista de dados com expertise em processamento de imagem e visão computacional para a IA do EkoVision.
+                    </p>
+                    <div class="flex justify-center space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="fab fa-twitter text-xl text-gray-400 hover:text-gold transition-colors"></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark-darker py-10 border-t border-gold/20">
+    <footer class="bg-dark-light py-8 text-center text-gray-400">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="#home" class="flex items-center space-x-2">
-                        <svg class="w-8 h-8" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- New Logo: Stylized E with sound wave -->
-                            <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <!-- Sound wave element -->
-                            <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                        <span class="text-xl font-bold text-gold">EkoVision</span>
-                    </a>
-                    <p class="text-gray-400 mt-2">O mundo em som.</p>
-                </div>
-                
-                <div class="flex space-x-6 mb-6 md:mb-0">
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </a>
-                </div>
-                
-                <div class="text-center md:text-right">
-                    <p class="text-gray-400">&copy; 2023 EkoVision. Todos os direitos reservados.</p>
-                    <p class="text-gray-500 text-sm mt-1">Desenvolvido com ❤️ para acessibilidade</p>
-                </div>
+            <p>&copy; 2024 EkoVision. Todos os direitos reservados.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
-        
-        // Navbar Scroll Effect
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Hide navbar on scroll down, show on scroll up
+        let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-3');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                navbar.classList.add('-translate-y-full');
             } else {
-                navbar.classList.add('py-3');
-                navbar.classList.remove('py-2');
+                // Scrolling up
+                navbar.classList.remove('-translate-y-full');
             }
-        });
-        
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            });
-        });
-        
-        // Simulation Functionality
-        const activateAiButton = document.getElementById('activate-ai');
-        const resultContainer = document.getElementById('result-container');
-        const aiDescription = document.getElementById('ai-description');
-        const responseTime = document.getElementById('response-time');
-        const scenarioSelect = document.getElementById('scenario');
-        const cameraIndicator = document.getElementById('camera-indicator');
-        const glassesContainer = document.getElementById('glasses-container');
-        const emergencyButton = document.getElementById('emergency-button');
-        
-        const descriptions = {
-            pharmacy: "Você está em uma farmácia. À sua frente, na prateleira central, encontra-se o produto: Dipirona 500mg. Preço: R$ 8,99. À direita há uma seção de cosméticos. À esquerda está o balcão de atendimento a aproximadamente 3 metros.",
-            supermarket: "Você está no corredor de cereais de um supermercado. À sua frente está: Arroz Integral Tipo 1. Preço: R$ 22,50 por kg. Promoção: leve 2kg, pague R$ 40,00. Corredor de laticínios à direita a aproximadamente 5 metros.",
-            street: "Você está em uma calçada. À sua frente há uma faixa de pedestres a 2 metros. Semáforo está vermelho para pedestres. Há uma parada de ônibus à direita a aproximadamente 10 metros. Detecto movimento de pessoas atravessando à sua esquerda."
-        };
-        
-        activateAiButton.addEventListener('click', () => {
-            // Show camera active indicator
-            cameraIndicator.style.display = 'block';
-            
-            // Add processing animation to glasses
-            glassesContainer.classList.remove('animate-float');
-            glassesContainer.classList.add('animate-pulse-slow');
-            
-            // Show loading state
-            resultContainer.classList.remove('hidden');
-            aiDescription.textContent = "Processando imagem...";
-            
-            // Simulate processing time
-            const processingTime = Math.random() * (1.5 - 0.8) + 0.8;
-            
-            setTimeout(() => {
-                // Get selected scenario
-                const scenario = scenarioSelect.value;
-                
-                // Update description
-                aiDescription.textContent = descriptions[scenario];
-                responseTime.textContent = processingTime.toFixed(1);
-                
-                // Return glasses to normal state
-                setTimeout(() => {
-                    cameraIndicator.style.display = 'none';
-                    glassesContainer.classList.remove('animate-pulse-slow');
-                    glassesContainer.classList.add('animate-float');
-                }, 1000);
-                
-            }, processingTime * 1000);
-        });
-        
-        emergencyButton.addEventListener('click', () => {
-            // Create emergency modal
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80';
-            modal.innerHTML = `
-                <div class="bg-dark-light p-8 rounded-xl max-w-md w-full border border-red-500 shadow-2xl">
-                    <div class="flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center animate-pulse">
-                            <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-center text-red-500">Emergência Ativada</h3>
-                    <p class="text-gray-300 mb-6 text-center">
-                        Enviando sua localização atual para seus contatos de emergência.
-                    </p>
-                    <div class="bg-dark-darker p-4 rounded-lg mb-6">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-gray-400">Status:</span>
-                            <span class="text-green-500">Localização enviada</span>
-                        </div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-gray-400">Coordenadas:</span>
-                            <span class="text-white">-23.5505, -46.6333</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-400">Contatos notificados:</span>
-                            <span class="text-white">3</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <button id="close-emergency" class="bg-white text-red-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300">
-                            Fechar
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(modal);
-            
-            // Add event listener to close button
-            document.getElementById('close-emergency').addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
+            lastScrollTop = scrollTop;
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'944572e6867b6eaa',t:'MTc0ODAxMjY5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
