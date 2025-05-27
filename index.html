@@ -1,654 +1,466 @@
+
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkoVision - O mundo em som</title>
+    <title>Sistema de Gerenciamento - Clínica Odontológica</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            light: '#f5d77f',
-                            DEFAULT: '#d4af37',
-                            dark: '#b8860b',
-                        },
-                        dark: {
-                            light: '#2d2d2d',
-                            DEFAULT: '#1a1a1a',
-                            darker: '#121212',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff;
         }
-        
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .modal {
+            transition: opacity 0.3s ease;
         }
-        
-        .gold-gradient {
-            background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b8860b 100%);
+        .fade-in {
+            animation: fadeIn 0.3s;
         }
-        
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .animate-pulse-slow {
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .clip-path-slant {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-        
-        .clip-path-slant-reverse {
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
-        }
-        
-        .perspective-container {
-            perspective: 1000px;
-        }
-        
-        .rotate-y-animation {
-            animation: rotateY 8s infinite linear;
-            transform-style: preserve-3d;
-        }
-        
-        @keyframes rotateY {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #d4af37;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .gold-button {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .gold-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-        
-        .gold-button:hover::before {
-            left: 100%;
-        }
-        
-        .glasses-svg {
-            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3));
+        .patient-row:hover {
+            background-color: #e0f2fe;
         }
     </style>
 </head>
-<body class="bg-dark-darker text-white">
-    <nav class="fixed w-full bg-dark-darker bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#home" class="flex items-center space-x-2">
-                <svg class="w-10 h-10" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <span class="text-xl font-bold text-gold">EkoVision</span>
-            </a>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-gold transition-colors">Início</a>
-                <a href="#problem" class="nav-link text-white hover:text-gold transition-colors">O Problema</a>
-                <a href="#solution" class="nav-link text-white hover:text-gold transition-colors">A Solução</a>
-                <a href="#simulation" class="nav-link text-white hover:text-gold transition-colors">Simulação</a>
-                <a href="#team" class="nav-link text-white hover:text-gold transition-colors">Equipe</a>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-sky-600 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                    <h1 class="text-2xl font-semibold">DentalClinic</h1>
+                </div>
+                <div>
+                    <button id="addPatientBtn" class="bg-white text-sky-600 px-4 py-2 rounded-lg font-medium hover:bg-sky-50 transition duration-300 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Novo Paciente
+                    </button>
+                </div>
             </div>
-            
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden bg-dark-darker border-t border-gold-dark">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
-                <a href="#problem" class="text-white hover:text-gold transition-colors">O Problema</a>
-                <a href="#solution" class="text-white hover:text-gold transition-colors">A Solução</a>
-                <a href="#simulation" class="text-white hover:text-gold transition-colors">Simulação</a>
-                <a href="#team" class="text-white hover:text-gold transition-colors">Equipe</a>
-            </div>
-        </div>
-    </nav>
+        </header>
 
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <div class="absolute inset-0 bg-dark-darker opacity-90 z-0"></div>
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/10 via-dark-darker to-dark-darker"></div>
-            <div class="h-full w-full flex">
-                <div class="w-1/3 h-full bg-gold/5 transform -skew-x-12 translate-x-20 opacity-30"></div>
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-8">
+            <!-- Search and Filter -->
+            <div class="mb-6 bg-white rounded-lg shadow-md p-4">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="relative flex-grow max-w-md">
+                        <input type="text" id="searchInput" placeholder="Buscar paciente..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <span id="patientCount" class="font-medium">0</span> pacientes cadastrados
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div class="container mx-auto px-4 py-16 z-10 relative">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-                        <span class="text-white">Eko</span><span class="text-gold">Vision</span>
-                    </h1>
-                    <h2 class="text-2xl md:text-3xl font-light mb-6 text-gold italic">O mundo em som.</h2>
-                    <p class="text-lg mb-8 text-gray-300 max-w-lg">
-                        Revolucionando a experiência de pessoas com deficiência visual através de óculos inteligentes que descrevem o mundo ao redor com precisão e elegância.
-                    </p>
-                    <a href="#solution" class="inline-block gold-button bg-gold text-dark-darker font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gold-dark transition-all duration-300 transform hover:-translate-y-1">
-                        Saiba mais
-                    </a>
+
+            <!-- Patients Table -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CPF</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefone</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-mail</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Nascimento</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="patientTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Patient rows will be inserted here -->
+                        </tbody>
+                    </table>
                 </div>
                 
-                <div class="md:w-1/2 perspective-container flex justify-center md:justify-end">
-                    <div class="animate-float">
-                        <img src="image_09f615.png" alt="Óculos EkoVision" class="w-full h-auto max-w-sm md:max-w-md lg:max-w-lg glasses-image shadow-xl rounded-lg">
-                    </div>
+                <!-- Empty State -->
+                <div id="emptyState" class="py-12 flex flex-col items-center justify-center text-center px-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h3 class="text-lg font-medium text-gray-900 mb-1">Nenhum paciente cadastrado</h3>
+                    <p class="text-gray-500 mb-4">Adicione seu primeiro paciente clicando no botão acima.</p>
+                    <button id="emptyStateAddBtn" class="bg-sky-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-sky-700 transition duration-300 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Adicionar Paciente
+                    </button>
                 </div>
             </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#problem" aria-label="Rolar para baixo">
-                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </a>
-        </div>
-    </section>
+        </main>
 
-    <section id="problem" class="py-20 bg-dark-light clip-path-slant relative">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                    <span class="relative inline-block">
-                        <span class="text-gold">O Problema</span>
-                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                    </span>
-                </h2>
-                
-                <div class="bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
-                    <div class="flex flex-col md:flex-row items-center mb-10">
-                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
-                            <div class="w-32 h-32 rounded-full bg-dark-light border-2 border-gold flex items-center justify-center">
-                                <i class="fas fa-eye-slash text-5xl text-gold"></i>
-                            </div>
-                        </div>
-                        <div class="md:w-2/3 md:pl-8">
-                            <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gold">Desafios diários enfrentados</h3>
-                            <p class="text-gray-300 mb-4">
-                                Pessoas com deficiência visual enfrentam obstáculos significativos ao navegar em ambientes cotidianos, especialmente em locais com muitas informações visuais.
-                            </p>
-                        </div>
+        <!-- Footer -->
+        <footer class="bg-white border-t border-gray-200 py-4">
+            <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+                &copy; 2023 Sistema de Gerenciamento - Clínica Odontológica. Todos os direitos reservados.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Add/Edit Patient Modal -->
+    <div id="patientModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto overflow-hidden fade-in">
+            <div class="bg-sky-600 text-white px-6 py-4 flex justify-between items-center">
+                <h3 id="modalTitle" class="text-lg font-medium">Adicionar Paciente</h3>
+                <button id="closeModal" class="text-white hover:text-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form id="patientForm" class="p-6">
+                <input type="hidden" id="patientId">
+                <div class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                        <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-shopping-cart text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Supermercados</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Identificar produtos, preços e informações nutricionais torna-se uma tarefa quase impossível sem assistência.
-                            </p>
-                        </div>
-                        
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-pills text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Farmácias</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Diferenciar medicamentos, ler bulas e instruções de dosagem representa um desafio crítico para a saúde.
-                            </p>
-                        </div>
-                        
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-city text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Espaços Públicos</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Navegar em ruas, identificar estabelecimentos e ler placas informativas são barreiras constantes à autonomia.
-                            </p>
-                        </div>
+                    <div>
+                        <label for="cpf" class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                        <input type="text" id="cpf" name="cpf" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="000.000.000-00">
                     </div>
-                    
-                    <div class="bg-dark-light p-6 rounded-lg border border-gold/30">
-                        <h4 class="text-xl font-semibold mb-4 text-gold">Impacto na Independência</h4>
-                        <p class="text-gray-300">
-                            A falta de acesso a informações visuais limita significativamente a autonomia e independência das pessoas com deficiência visual, criando uma dependência constante de terceiros para tarefas cotidianas que poderiam ser realizadas de forma independente com a tecnologia adequada.
-                        </p>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+                        <input type="tel" id="phone" name="phone" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="(00) 00000-0000">
                     </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                        <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                    <div>
+                        <label for="birthdate" class="block text-sm font-medium text-gray-700 mb-1">Data de Nascimento</label>
+                        <input type="date" id="birthdate" name="birthdate" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
+                    <button type="submit" id="saveBtn" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto overflow-hidden fade-in">
+            <div class="bg-red-600 text-white px-6 py-4 flex justify-between items-center">
+                <h3 class="text-lg font-medium">Confirmar Exclusão</h3>
+                <button id="closeDeleteModal" class="text-white hover:text-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <p class="text-gray-700">Tem certeza que deseja excluir o paciente <span id="deletePatientName" class="font-semibold"></span>?</p>
+                    <p class="text-gray-500 text-sm mt-1">Esta ação não pode ser desfeita.</p>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelDeleteBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">Cancelar</button>
+                    <button id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Excluir</button>
                 </div>
             </div>
         </div>
-        
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
-            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
-                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 transition-all duration-300 flex items-center z-50">
+        <span id="toastIcon" class="mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
-        </div>
-    </section>
-
-    <section id="solution" class="py-20 bg-dark-darker relative">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">A Solução</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="flex flex-col md:flex-row items-center mb-16">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <div class="perspective-container">
-                        <div class="animate-float">
-                            <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                                
-                                <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                                <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                                
-                                <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                                <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                                
-                                <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                                
-                                <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                
-                                <circle cx="200" cy="80" r="15" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
-                                <path d="M185 80 L215 80 M200 65 L200 95" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="md:w-1/2 md:pl-10">
-                    <h3 class="text-2xl font-bold mb-6 text-gold">Apresentando o EkoVision</h3>
-                    <p class="text-gray-300 mb-6">
-                        O EkoVision é um óculos de sol inteligente projetado especificamente para pessoas com deficiência visual, combinando tecnologia avançada com um design elegante e discreto.
-                    </p>
-                    <p class="text-gray-300 mb-6">
-                        Nosso dispositivo transforma informações visuais em descrições de áudio precisas, permitindo que os usuários "enxerguem" o mundo através do som, proporcionando maior independência e confiança no dia a dia.
-                    </p>
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                            <i class="fas fa-tag text-gold"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-semibold text-white">Preço acessível</h4>
-                            <p class="text-gold font-bold">R$ 1.499,00</p>
-                            <p class="text-sm text-gray-400">Parcelamento em até 12x sem juros</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-camera text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Câmera HD</h4>
-                    <p class="text-gray-300 text-center">
-                        Câmera de alta definição posicionada no canto superior direito da armação, capturando imagens do ambiente com precisão.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-brain text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">IA Avançada</h4>
-                    <p class="text-gray-300 text-center">
-                        Inteligência artificial que identifica objetos, textos, pessoas e ambientes, processando informações em tempo real.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-volume-up text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Som Direcional</h4>
-                    <p class="text-gray-300 text-center">
-                        Micro caixas de som embutidas nas hastes do óculos, proporcionando áudio claro sem bloquear sons ambientais importantes.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-bluetooth-b text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Conectividade</h4>
-                    <p class="text-gray-300 text-center">
-                        Conexão Bluetooth com o smartphone do usuário, permitindo processamento avançado e acesso à internet.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20">
-                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Como Funciona a Conectividade</h3>
-                
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <div class="relative">
-                            <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M120 150 H280" stroke="#d4af37" stroke-width="2.5" class="animate-pulse-slow"/>
-                                
-                                <path d="M120 150 L100 160 L100 180 C100 185, 105 190, 110 190 L150 190 C155 190, 160 185, 160 180 L160 160 L120 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                <path d="M280 150 L300 160 L300 180 C300 185, 295 190, 290 190 L250 190 C245 190, 240 185, 240 180 L240 160 L280 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <path d="M160 165 C180 160, 220 160, 240 165" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <path d="M110 160 L150 160 L150 180 C150 182, 148 184, 146 184 L114 184 C112 184, 110 182, 110 180 L110 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M250 160 L290 160 L290 180 C290 182, 288 184, 286 184 L254 184 C252 184, 250 182, 250 180 L250 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                
-                                <path d="M100 170 L80 175" stroke="#d4af37" stroke-width="2"/>
-                                <path d="M300 170 L320 175" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <circle cx="290" cy="155" r="4" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <circle cx="290" cy="155" r="2" fill="#d4af37"/>
-                                <circle cx="290" cy="155" r="0.7" fill="#ffffff"/>
-                                
-                                <rect x="85" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
-                                <rect x="307" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <rect x="180" y="200" width="40" height="70" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <rect x="185" y="205" width="30" height="50" rx="2" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                <circle cx="200" cy="265" r="3" fill="#d4af37"/>
-                                
-                                <path d="M200 80 C220 50, 260 50, 270 80 C290 80, 310 100, 290 120 C300 140, 280 160, 260 150 C250 170, 210 170, 200 150 C180 160, 160 140, 170 120 C150 100, 170 80, 200 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <text x="200" y="120" text-anchor="middle" fill="#d4af37" font-size="14">AI Cloud</text>
-                                
-                                <path d="M150 170 C160 180, 180 190, 180 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                <path d="M250 170 C240 180, 220 190, 220 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                <path d="M200 200 C200 180, 200 160, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                
-                                <path d="M200 80 C200 100, 200 120, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                
-                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 215" stroke="#d4af37" stroke-width="2" class="animate-pulse-slow"/>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 md:pl-10">
-                        <ul class="list-disc list-inside text-gray-300 space-y-4">
-                            <li>
-                                <span class="font-semibold text-gold">Câmera Capta:</span> A câmera nos óculos captura o ambiente ao redor do usuário.
-                            </li>
-                            <li>
-                                <span class="font-semibold text-gold">Envio ao Smartphone:</span> As imagens são enviadas em tempo real via Bluetooth para o smartphone conectado.
-                            </li>
-                            <li>
-                                <span class="font-semibold text-gold">Processamento na Nuvem (Smartphone/IA):</span> O smartphone, com sua capacidade de processamento e conexão à internet, envia as imagens para a inteligência artificial na nuvem para análise avançada. Isso permite o uso de modelos de IA mais robustos e atualizados, sem depender exclusivamente do hardware do óculos.
-                            </li>
-                            <li>
-                                <span class="font-semibold text-gold">Retorno da Descrição:</span> A IA processa as imagens e retorna uma descrição de áudio detalhada para o smartphone.
-                            </li>
-                            <li>
-                                <span class="font-semibold text-gold">Áudio para o Usuário:</span> O smartphone retransmite a descrição de áudio para os micro alto-falantes nas hastes dos óculos, permitindo que o usuário ouça o que está ao seu redor de forma clara e contextualizada.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
-            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
-                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
-            </svg>
-        </div>
-    </section>
-
-    <section id="simulation" class="py-20 bg-dark-light relative">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">Simulação de Uso</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="max-w-4xl mx-auto bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
-                <p class="text-lg text-gray-300 mb-8 text-center">
-                    Imagine a seguinte situação com o EkoVision em ação:
-                </p>
-                
-                <div class="space-y-8">
-                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
-                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
-                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
-                                <i class="fas fa-store text-3xl text-gold"></i>
-                            </div>
-                        </div>
-                        <div class="md:w-3/4 md:pl-6">
-                            <h3 class="text-xl font-semibold mb-2 text-gold">No Supermercado:</h3>
-                            <p class="text-gray-300">
-                                Ao passar por um corredor, o EkoVision descreve: "À sua direita, prateleira de laticínios. Há iogurte, leite e queijos. O leite integral está no segundo nicho, a R$ 5,99."
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
-                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
-                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
-                                <i class="fas fa-road text-3xl text-gold"></i>
-                            </div>
-                        </div>
-                        <div class="md:w-3/4 md:pl-6">
-                            <h3 class="text-xl font-semibold mb-2 text-gold">Na Rua:</h3>
-                            <p class="text-gray-300">
-                                Enquanto caminha, o óculos informa: "Você está se aproximando de uma faixa de pedestres. Um carro está parado à sua esquerda. Há um café à sua direita, 'Café Aurora'."
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col md:flex-row items-center bg-dark-light p-6 rounded-lg border-l-4 border-gold">
-                        <div class="md:w-1/4 flex justify-center mb-4 md:mb-0">
-                            <div class="w-20 h-20 rounded-full bg-gold/20 flex items-center justify-center">
-                                <i class="fas fa-book-open text-3xl text-gold"></i>
-                            </div>
-                        </div>
-                        <div class="md:w-3/4 md:pl-6">
-                            <h3 class="text-xl font-semibold mb-2 text-gold">Lendo um Documento:</h3>
-                            <p class="text-gray-300">
-                                Ao apontar para uma folha de papel, o EkoVision lê: "É um contrato de aluguel. A data de início é 15 de maio de 2024. O valor mensal é de R$ 1.200."
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
-            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
-                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
-            </svg>
-        </div>
-    </section>
-
-    <section id="team" class="py-20 bg-dark-darker relative">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">Nossa Equipe</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
-                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 1" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
-                    <h3 class="text-2xl font-bold text-gold mb-2">João Silva</h3>
-                    <p class="text-gray-300 mb-4">Líder de Projeto</p>
-                    <p class="text-gray-400 text-sm">
-                        Engenheiro de software com paixão por IA e acessibilidade. Lidera a visão e estratégia do EkoVision.
-                    </p>
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-github text-xl"></i></a>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
-                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 2" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
-                    <h3 class="text-2xl font-bold text-gold mb-2">Maria Oliveira</h3>
-                    <p class="text-gray-300 mb-4">Designer de Produto</p>
-                    <p class="text-gray-400 text-sm">
-                        Especialista em UX/UI, focada em criar interfaces intuitivas e um design ergonômico para os óculos.
-                    </p>
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-behance text-xl"></i></a>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20 text-center transform transition-all hover:scale-105">
-                    <img src="https://via.placeholder.com/150" alt="Nome do Membro 3" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-gold object-cover">
-                    <h3 class="text-2xl font-bold text-gold mb-2">Pedro Santos</h3>
-                    <p class="text-gray-300 mb-4">Desenvolvedor de IA</p>
-                    <p class="text-gray-400 text-sm">
-                        Cientista de dados com expertise em processamento de imagem e visão computacional para a IA do EkoVision.
-                    </p>
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <a href="#" class="text-gray-400 hover:text-gold transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="#" class="fab fa-twitter text-xl text-gray-400 hover:text-gold transition-colors"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-dark-light py-8 text-center text-gray-400">
-        <div class="container mx-auto px-4">
-            <p>&copy; 2024 EkoVision. Todos os direitos reservados.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-gold transition-colors"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
+        </span>
+        <span id="toastMessage">Operação realizada com sucesso!</span>
+    </div>
 
     <script>
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const patientTableBody = document.getElementById('patientTableBody');
+            const emptyState = document.getElementById('emptyState');
+            const patientModal = document.getElementById('patientModal');
+            const deleteModal = document.getElementById('deleteModal');
+            const patientForm = document.getElementById('patientForm');
+            const modalTitle = document.getElementById('modalTitle');
+            const patientCount = document.getElementById('patientCount');
+            const searchInput = document.getElementById('searchInput');
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            // Form fields
+            const patientIdField = document.getElementById('patientId');
+            const nameField = document.getElementById('name');
+            const cpfField = document.getElementById('cpf');
+            const phoneField = document.getElementById('phone');
+            const emailField = document.getElementById('email');
+            const birthdateField = document.getElementById('birthdate');
+            
+            // Buttons
+            const addPatientBtn = document.getElementById('addPatientBtn');
+            const emptyStateAddBtn = document.getElementById('emptyStateAddBtn');
+            const closeModalBtn = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const closeDeleteModalBtn = document.getElementById('closeDeleteModal');
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            
+            // Initialize patients from localStorage or empty array
+            let patients = JSON.parse(localStorage.getItem('dentalClinicPatients')) || [];
+            
+            // Input masks
+            cpfField.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                
+                if (value.length > 9) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+                } else if (value.length > 6) {
+                    value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
+                } else if (value.length > 3) {
+                    value = value.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
+                }
+                
+                e.target.value = value;
             });
-        });
-
-        // Hide navbar on scroll down, show on scroll up
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('navbar');
-
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop) {
-                // Scrolling down
-                navbar.classList.add('-translate-y-full');
-            } else {
-                // Scrolling up
-                navbar.classList.remove('-translate-y-full');
+            
+            phoneField.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                
+                if (value.length > 6) {
+                    value = value.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+                } else if (value.length > 0) {
+                    value = value.replace(/^(\d{0,2}).*/, '($1');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Event Listeners
+            addPatientBtn.addEventListener('click', openAddModal);
+            emptyStateAddBtn.addEventListener('click', openAddModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            patientForm.addEventListener('submit', savePatient);
+            closeDeleteModalBtn.addEventListener('click', closeDeleteModal);
+            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+            confirmDeleteBtn.addEventListener('click', deletePatient);
+            searchInput.addEventListener('input', filterPatients);
+            
+            // Initialize the table
+            updatePatientTable();
+            
+            // Functions
+            function openAddModal() {
+                modalTitle.textContent = 'Adicionar Paciente';
+                patientForm.reset();
+                patientIdField.value = '';
+                patientModal.classList.remove('hidden');
             }
-            lastScrollTop = scrollTop;
+            
+            function openEditModal(patientId) {
+                const patient = patients.find(p => p.id === patientId);
+                if (!patient) return;
+                
+                modalTitle.textContent = 'Editar Paciente';
+                patientIdField.value = patient.id;
+                nameField.value = patient.name;
+                cpfField.value = patient.cpf;
+                phoneField.value = patient.phone;
+                emailField.value = patient.email;
+                birthdateField.value = patient.birthdate;
+                
+                patientModal.classList.remove('hidden');
+            }
+            
+            function closeModal() {
+                patientModal.classList.add('hidden');
+            }
+            
+            function openDeleteModal(patientId) {
+                const patient = patients.find(p => p.id === patientId);
+                if (!patient) return;
+                
+                document.getElementById('deletePatientName').textContent = patient.name;
+                confirmDeleteBtn.setAttribute('data-id', patientId);
+                deleteModal.classList.remove('hidden');
+            }
+            
+            function closeDeleteModal() {
+                deleteModal.classList.add('hidden');
+            }
+            
+            function savePatient(e) {
+                e.preventDefault();
+                
+                const patientId = patientIdField.value;
+                const newPatient = {
+                    id: patientId || Date.now().toString(),
+                    name: nameField.value,
+                    cpf: cpfField.value,
+                    phone: phoneField.value,
+                    email: emailField.value,
+                    birthdate: birthdateField.value
+                };
+                
+                if (patientId) {
+                    // Edit existing patient
+                    const index = patients.findIndex(p => p.id === patientId);
+                    if (index !== -1) {
+                        patients[index] = newPatient;
+                        showToast('Paciente atualizado com sucesso!', 'success');
+                    }
+                } else {
+                    // Add new patient
+                    patients.push(newPatient);
+                    showToast('Paciente cadastrado com sucesso!', 'success');
+                }
+                
+                // Save to localStorage and update UI
+                localStorage.setItem('dentalClinicPatients', JSON.stringify(patients));
+                updatePatientTable();
+                closeModal();
+            }
+            
+            function deletePatient() {
+                const patientId = confirmDeleteBtn.getAttribute('data-id');
+                patients = patients.filter(p => p.id !== patientId);
+                
+                // Save to localStorage and update UI
+                localStorage.setItem('dentalClinicPatients', JSON.stringify(patients));
+                updatePatientTable();
+                closeDeleteModal();
+                showToast('Paciente excluído com sucesso!', 'success');
+            }
+            
+            function updatePatientTable() {
+                // Update patient count
+                patientCount.textContent = patients.length;
+                
+                // Clear table
+                patientTableBody.innerHTML = '';
+                
+                // Show/hide empty state
+                if (patients.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                } else {
+                    emptyState.classList.add('hidden');
+                }
+                
+                // Filter patients if search is active
+                let filteredPatients = patients;
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    filteredPatients = patients.filter(patient => 
+                        patient.name.toLowerCase().includes(searchTerm) || 
+                        patient.cpf.includes(searchTerm) ||
+                        patient.email.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                // Add patient rows
+                filteredPatients.forEach(patient => {
+                    const row = document.createElement('tr');
+                    row.className = 'patient-row hover:bg-gray-50';
+                    
+                    // Format birthdate for display
+                    const birthDate = new Date(patient.birthdate);
+                    const formattedDate = birthDate.toLocaleDateString('pt-BR');
+                    
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-gray-900">${patient.name}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${patient.cpf}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${patient.phone}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${patient.email}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-500">${formattedDate}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <button class="text-sky-600 hover:text-sky-800 mr-3 edit-btn" data-id="${patient.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800 delete-btn" data-id="${patient.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </td>
+                    `;
+                    
+                    patientTableBody.appendChild(row);
+                });
+                
+                // Add event listeners to edit and delete buttons
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', () => openEditModal(btn.getAttribute('data-id')));
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', () => openDeleteModal(btn.getAttribute('data-id')));
+                });
+            }
+            
+            function filterPatients() {
+                updatePatientTable();
+            }
+            
+            function showToast(message, type = 'success') {
+                toastMessage.textContent = message;
+                
+                // Set icon based on type
+                if (type === 'success') {
+                    toastIcon.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    `;
+                } else if (type === 'error') {
+                    toastIcon.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    `;
+                }
+                
+                // Show toast
+                toast.classList.remove('translate-y-10', 'opacity-0');
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-y-10', 'opacity-0');
+                }, 3000);
+            }
         });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94676a96738cf19d',t:'MTc0ODM2ODg3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
