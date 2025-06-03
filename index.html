@@ -4,37 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaNow - Pediu, chegou!</title>
+    <title>EkoVision - O mundo em som</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#f5d77f',
+                            DEFAULT: '#d4af37',
+                            dark: '#b8860b',
+                        },
+                        dark: {
+                            light: '#2d2d2d',
+                            DEFAULT: '#1a1a1a',
+                            darker: '#121212',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary-blue: #0056b3;
-            --secondary-blue: #007bff;
-            --dark-blue: #003366;
-            --light-blue: #e6f2ff;
-            --black: #1a1a1a;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            color: var(--black);
-            background-color: #f8f9fa;
         }
         
-        .btn-primary {
-            background-color: var(--primary-blue);
-            color: white;
-            transition: all 0.3s ease;
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
-        .btn-primary:hover {
-            background-color: var(--dark-blue);
-            transform: translateY(-2px);
+        .gold-gradient {
+            background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b8860b 100%);
         }
         
-        .water-bg {
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--secondary-blue) 100%);
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .clip-path-slant-reverse {
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .perspective-container {
+            perspective: 1000px;
+        }
+        
+        .rotate-y-animation {
+            animation: rotateY 8s infinite linear;
+            transform-style: preserve-3d;
+        }
+        
+        @keyframes rotateY {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         
         .nav-link {
@@ -48,7 +108,7 @@
             height: 2px;
             bottom: -2px;
             left: 0;
-            background-color: var(--primary-blue);
+            background-color: #d4af37;
             transition: width 0.3s ease;
         }
         
@@ -56,814 +116,850 @@
             width: 100%;
         }
         
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .water-drop {
+        .gold-button {
             position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            background-color: var(--secondary-blue);
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(45deg);
-            margin: 0 auto 20px;
+            overflow: hidden;
+            z-index: 1;
         }
         
-        .water-drop::before {
+        .gold-button::before {
             content: '';
             position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background-color: var(--secondary-blue);
-            border-radius: 50% 50% 0 50%;
-            opacity: 0.7;
-            animation: pulse 2s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
         }
         
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
+        .gold-button:hover::before {
+            left: 100%;
         }
         
-        .wave-divider {
-            height: 50px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230056b3' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background-color: var(--primary-blue);
-            color: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: translateX(200%);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .ods-badge {
-            background-color: var(--primary-blue);
-            color: white;
-            border-radius: 50px;
-            padding: 8px 16px;
-            display: inline-flex;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .ods-badge span {
-            margin-left: 8px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background-color: #e6e6e6;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background-color: var(--primary-blue);
-            border-radius: 4px;
-            transition: width 1s ease;
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            background-color: var(--light-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .feature-icon svg {
-            width: 32px;
-            height: 32px;
-            color: var(--primary-blue);
-        }
-
-        .step-item {
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .step-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 24px;
-            height: 24px;
-            background-color: var(--primary-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .step-item:nth-child(1)::before {
-            content: '1';
-        }
-
-        .step-item:nth-child(2)::before {
-            content: '2';
-        }
-
-        .step-item:nth-child(3)::before {
-            content: '3';
-        }
-
-        .step-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 12px;
-            top: 24px;
-            width: 2px;
-            height: calc(100% - 24px);
-            background-color: var(--primary-blue);
+        .glasses-svg {
+            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3));
         }
     </style>
 </head>
-<body>
-    <!-- Notification System -->
-    <div id="notification" class="notification">
-        <div class="flex items-center">
-            <span id="notification-message">Notificação</span>
-            <button onclick="closeNotification()" class="ml-4 text-white">&times;</button>
-        </div>
-    </div>
-
+<body class="bg-dark-darker text-white">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="text-3xl font-bold text-[#0056b3]">
-                        Aqua<span class="text-black">Now</span>
-                    </div>
-                    <div class="ml-2 text-sm italic text-gray-600">Pediu, chegou!</div>
-                </div>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-800 hover:text-[#0056b3]">Início</a>
-                    <a href="#about" class="nav-link text-gray-800 hover:text-[#0056b3]">Sobre Nós</a>
-                    <a href="#services" class="nav-link text-gray-800 hover:text-[#0056b3]">Serviços</a>
-                    <a href="#sustainability" class="nav-link text-gray-800 hover:text-[#0056b3]">Sustentabilidade</a>
-                    <a href="#order" class="nav-link text-gray-800 hover:text-[#0056b3]">Pedido Rápido</a>
-                    <a href="#register" class="nav-link text-gray-800 hover:text-[#0056b3]">Cadastro</a>
-                    <a href="#contact" class="nav-link text-gray-800 hover:text-[#0056b3]">Contato</a>
-                </div>
-                
-                <div class="md:hidden">
-                    <button id="menu-toggle" class="text-gray-800 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="fixed w-full bg-dark-darker bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2">
+                <svg class="w-10 h-10" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- New Logo: Stylized E with sound wave -->
+                    <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                    <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Sound wave element -->
+                    <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <span class="text-xl font-bold text-gold">EkoVision</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-gold transition-colors">Início</a>
+                <a href="#problem" class="nav-link text-white hover:text-gold transition-colors">O Problema</a>
+                <a href="#solution" class="nav-link text-white hover:text-gold transition-colors">A Solução</a>
+                <a href="#simulation" class="nav-link text-white hover:text-gold transition-colors">Simulação</a>
+                <a href="#team" class="nav-link text-white hover:text-gold transition-colors">Equipe</a>
             </div>
             
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-2">
-                <a href="#home" class="block py-2 text-gray-800 hover:text-[#0056b3]">Início</a>
-                <a href="#about" class="block py-2 text-gray-800 hover:text-[#0056b3]">Sobre Nós</a>
-                <a href="#services" class="block py-2 text-gray-800 hover:text-[#0056b3]">Serviços</a>
-                <a href="#sustainability" class="block py-2 text-gray-800 hover:text-[#0056b3]">Sustentabilidade</a>
-                <a href="#order" class="block py-2 text-gray-800 hover:text-[#0056b3]">Pedido Rápido</a>
-                <a href="#register" class="block py-2 text-gray-800 hover:text-[#0056b3]">Cadastro</a>
-                <a href="#contact" class="block py-2 text-gray-800 hover:text-[#0056b3]">Contato</a>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-darker border-t border-gold-dark">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
+                <a href="#problem" class="text-white hover:text-gold transition-colors">O Problema</a>
+                <a href="#solution" class="text-white hover:text-gold transition-colors">A Solução</a>
+                <a href="#simulation" class="text-white hover:text-gold transition-colors">Simulação</a>
+                <a href="#team" class="text-white hover:text-gold transition-colors">Equipe</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative">
-        <div class="bg-gradient-to-r from-[#0056b3] to-[#003366] text-white">
-            <div class="container mx-auto px-4 py-20 md:py-32">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0">
-                        <h1 class="text-4xl md:text-5xl font-bold mb-4">Água potável na sua casa quando você precisar</h1>
-                        <p class="text-xl mb-8">Entrega rápida, segura e sustentável para garantir seu abastecimento.</p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#order" class="btn-primary px-8 py-3 rounded-lg font-semibold text-center">Fazer Pedido</a>
-                            <a href="#register" class="bg-white text-[#0056b3] px-8 py-3 rounded-lg font-semibold text-center hover:bg-gray-100 transition">Cadastre-se</a>
-                        </div>
-                    </div>
-                    <div class="md:w-1/2 flex justify-center">
-                        <svg width="400" height="300" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M300,220 C380,220 440,170 440,120 C440,70 380,20 300,20 C220,20 160,70 160,120 C160,170 220,220 300,220 Z" fill="#e6f2ff" />
-                            <path d="M300,380 C420,380 520,310 520,220 C520,130 420,60 300,60 C180,60 80,130 80,220 C80,310 180,380 300,380 Z" fill="#007bff" opacity="0.3" />
-                            <path d="M280,180 L280,120 L320,120 L320,180 L350,180 L300,230 L250,180 L280,180 Z" fill="#0056b3" />
-                            <circle cx="300" cy="100" r="20" fill="#0056b3" />
-                            <path d="M240,280 C240,280 260,320 300,320 C340,320 360,280 360,280" stroke="#0056b3" stroke-width="10" fill="none" />
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="absolute inset-0 bg-dark-darker opacity-90 z-0"></div>
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/10 via-dark-darker to-dark-darker"></div>
+            <div class="h-full w-full flex">
+                <div class="w-1/3 h-full bg-gold/5 transform -skew-x-12 translate-x-20 opacity-30"></div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 py-16 z-10 relative">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                        <span class="text-white">Eko</span><span class="text-gold">Vision</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-light mb-6 text-gold italic">O mundo em som.</h2>
+                    <p class="text-lg mb-8 text-gray-300 max-w-lg">
+                        Revolucionando a experiência de pessoas com deficiência visual através de óculos inteligentes que descrevem o mundo ao redor com precisão e elegância.
+                    </p>
+                    <a href="#solution" class="inline-block gold-button bg-gold text-dark-darker font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gold-dark transition-all duration-300 transform hover:-translate-y-1">
+                        Saiba mais
+                    </a>
+                </div>
+                
+                <div class="md:w-1/2 perspective-container">
+                    <div class="animate-float">
+                        <!-- New Ray-Ban style glasses -->
+                        <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Frame Top Bar -->
+                            <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                            
+                            <!-- Frame Front -->
+                            <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            
+                            <!-- Bridge -->
+                            <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                            
+                            <!-- Lenses (Dark) -->
+                            <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                            <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                            
+                            <!-- Temple Arms -->
+                            <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                            <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                            
+                            <!-- Mini Camera (top right corner) -->
+                            <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                            <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                            <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                            
+                            <!-- Mini Speakers on Temple Arms -->
+                            <!-- Left Speaker -->
+                            <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                            <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                            
+                            <!-- Right Speaker -->
+                            <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                            <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                            
+                            <!-- Subtle Ray-Ban style logo hint on temple -->
+                            <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                            
+                            <!-- Reflection on lenses -->
+                            <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                            <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
                         </svg>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="wave-divider"></div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Sobre a AquaNow</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Conheça nossa história e como trabalhamos para garantir água de qualidade para todos.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-semibold text-[#0056b3] mb-4">Nossa Missão</h3>
-                    <p class="text-gray-700 mb-6">A AquaNow nasceu com o propósito de garantir acesso à água potável de qualidade para todos, de forma rápida e eficiente. Acreditamos que o acesso à água limpa é um direito fundamental e trabalhamos incansavelmente para tornar isso uma realidade.</p>
-                    
-                    <h3 class="text-2xl font-semibold text-[#0056b3] mb-4">Parceria com a Prefeitura</h3>
-                    <p class="text-gray-700 mb-6">Temos orgulho de nossa parceria estratégica com a prefeitura local, que nos permite garantir o abastecimento contínuo mesmo em períodos de escassez. Esta colaboração nos ajuda a manter preços acessíveis e um serviço confiável para toda a população.</p>
-                    
-                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-[#0056b3] mb-6">
-                        <h4 class="text-lg font-semibold text-[#003366] mb-2">Como funciona nossa parceria:</h4>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Acesso prioritário às fontes de água municipais
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Monitoramento conjunto da qualidade da água
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Planos de contingência para períodos de escassez
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Atendimento prioritário a áreas vulneráveis
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <h3 class="text-2xl font-semibold text-[#0056b3] mb-4">Nossa Infraestrutura</h3>
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                            <div class="text-[#0056b3] text-4xl font-bold mb-2">15</div>
-                            <p class="text-gray-600">Caminhões de Distribuição</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-lg shadow-sm text-center">
-                            <div class="text-[#0056b3] text-4xl font-bold mb-2">500mil</div>
-                            <p class="text-gray-600">Litros em Estoque</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center">
-                    <svg width="400" height="400" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Water tank -->
-                        <rect x="150" y="100" width="300" height="400" rx="20" fill="#e6f2ff" stroke="#0056b3" stroke-width="8" />
-                        
-                        <!-- Water level -->
-                        <rect x="150" y="250" width="300" height="250" rx="0" fill="#007bff" opacity="0.7" />
-                        
-                        <!-- Water waves -->
-                        <path d="M150,250 C200,230 250,270 300,250 C350,230 400,270 450,250" stroke="#0056b3" stroke-width="5" fill="none" />
-                        <path d="M150,280 C200,260 250,300 300,280 C350,260 400,300 450,280" stroke="#0056b3" stroke-width="5" fill="none" />
-                        
-                        <!-- Truck -->
-                        <rect x="180" y="520" width="240" height="60" rx="10" fill="#1a1a1a" />
-                        <rect x="150" y="480" width="300" height="40" rx="5" fill="#0056b3" />
-                        <circle cx="220" cy="580" r="20" fill="#333" />
-                        <circle cx="380" cy="580" r="20" fill="#333" />
-                        <rect x="400" y="500" width="40" height="20" rx="5" fill="#e6f2ff" />
-                        
-                        <!-- Pipes -->
-                        <rect x="450" y="200" width="50" height="20" rx="5" fill="#0056b3" />
-                        <rect x="100" y="200" width="50" height="20" rx="5" fill="#0056b3" />
-                    </svg>
-                </div>
-            </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#problem" aria-label="Rolar para baixo">
+                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50">
+    <!-- Problem Section -->
+    <section id="problem" class="py-20 bg-dark-light clip-path-slant relative">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Nossos Serviços</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Oferecemos soluções completas para o abastecimento de água potável.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="card bg-white rounded-lg shadow-lg p-6 border-t-4 border-[#0056b3]">
-                    <div class="water-drop mb-4"></div>
-                    <h3 class="text-xl font-semibold text-[#003366] mb-3">Entrega Residencial</h3>
-                    <p class="text-gray-600 mb-4">Entregamos água potável diretamente na sua residência, com rapidez e segurança.</p>
-                    <ul class="text-gray-700 space-y-2">
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Entrega no mesmo dia
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Água 100% tratada
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Monitoramento de qualidade
-                        </li>
-                    </ul>
-                </div>
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                    <span class="relative inline-block">
+                        <span class="text-gold">O Problema</span>
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                    </span>
+                </h2>
                 
-                <div class="card bg-white rounded-lg shadow-lg p-6 border-t-4 border-[#0056b3]">
-                    <div class="water-drop mb-4"></div>
-                    <h3 class="text-xl font-semibold text-[#003366] mb-3">Abastecimento Comercial</h3>
-                    <p class="text-gray-600 mb-4">Soluções para empresas, comércios e indústrias com necessidades específicas.</p>
-                    <ul class="text-gray-700 space-y-2">
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Contratos personalizados
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Grandes volumes
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Entregas programadas
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="card bg-white rounded-lg shadow-lg p-6 border-t-4 border-[#0056b3]">
-                    <div class="water-drop mb-4"></div>
-                    <h3 class="text-xl font-semibold text-[#003366] mb-3">Emergências</h3>
-                    <p class="text-gray-600 mb-4">Atendimento prioritário em situações de falta de água ou emergências.</p>
-                    <ul class="text-gray-700 space-y-2">
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Atendimento 24/7
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Prioridade máxima
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-[#0056b3]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            Resposta rápida
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mt-16 bg-white rounded-lg shadow-lg p-8">
-                <h3 class="text-2xl font-semibold text-[#003366] mb-6 text-center">Como Funciona</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center">
-                        <div class="feature-icon mx-auto">
-                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-                                <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path>
-                            </svg>
+                <div class="bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
+                    <div class="flex flex-col md:flex-row items-center mb-10">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="w-32 h-32 rounded-full bg-dark-light border-2 border-gold flex items-center justify-center">
+                                <i class="fas fa-eye-slash text-5xl text-gold"></i>
+                            </div>
                         </div>
-                        <h4 class="text-lg font-semibold text-[#003366] mb-2">1. Faça seu pedido</h4>
-                        <p class="text-gray-600">Solicite água através do nosso site ou aplicativo, informando a quantidade necessária.</p>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gold">Desafios diários enfrentados</h3>
+                            <p class="text-gray-300 mb-4">
+                                Pessoas com deficiência visual enfrentam obstáculos significativos ao navegar em ambientes cotidianos, especialmente em locais com muitas informações visuais.
+                            </p>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="feature-icon mx-auto">
-                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z"></path>
-                            </svg>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-shopping-cart text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Supermercados</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Identificar produtos, preços e informações nutricionais torna-se uma tarefa quase impossível sem assistência.
+                            </p>
                         </div>
-                        <h4 class="text-lg font-semibold text-[#003366] mb-2">2. Processamos seu pedido</h4>
-                        <p class="text-gray-600">Nossa equipe organiza a logística para garantir a entrega mais rápida possível.</p>
+                        
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-pills text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Farmácias</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Diferenciar medicamentos, ler bulas e instruções de dosagem representa um desafio crítico para a saúde.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                                    <i class="fas fa-city text-gold"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold">Espaços Públicos</h4>
+                            </div>
+                            <p class="text-gray-300">
+                                Navegar em ruas, identificar estabelecimentos e ler placas informativas são barreiras constantes à autonomia.
+                            </p>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <div class="feature-icon mx-auto">
-                            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"></path>
-                            </svg>
-                        </div>
-                        <h4 class="text-lg font-semibold text-[#003366] mb-2">3. Receba em casa</h4>
-                        <p class="text-gray-600">Nossos entregadores levam água de qualidade diretamente até você, no mesmo dia.</p>
+                    
+                    <div class="bg-dark-light p-6 rounded-lg border border-gold/30">
+                        <h4 class="text-xl font-semibold mb-4 text-gold">Impacto na Independência</h4>
+                        <p class="text-gray-300">
+                            A falta de acesso a informações visuais limita significativamente a autonomia e independência das pessoas com deficiência visual, criando uma dependência constante de terceiros para tarefas cotidianas que poderiam ser realizadas de forma independente com a tecnologia adequada.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
+            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
+                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
+            </svg>
+        </div>
     </section>
 
-    <!-- Sustainability Section -->
-    <section id="sustainability" class="py-16 bg-white">
+    <!-- Solution Section -->
+    <section id="solution" class="py-20 bg-dark-darker relative">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <div class="ods-badge inline-block mb-4">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block">
-                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="white"/>
-                        <path d="M12 17L12 11" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="12" cy="8" r="1" fill="white"/>
-                    </svg>
-                    <span>ODS 6.3</span>
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">A Solução</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="perspective-container">
+                        <div class="animate-float">
+                            <!-- New Ray-Ban style glasses -->
+                            <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Frame Top Bar -->
+                                <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                                
+                                <!-- Frame Front -->
+                                <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Bridge -->
+                                <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Lenses (Dark) -->
+                                <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Temple Arms -->
+                                <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                                <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                                
+                                <!-- Mini Camera (top right corner) -->
+                                <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                                <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                                
+                                <!-- Mini Speakers on Temple Arms -->
+                                <!-- Left Speaker -->
+                                <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Right Speaker -->
+                                <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Subtle Ray-Ban style logo hint on temple -->
+                                <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                                
+                                <!-- Reflection on lenses -->
+                                <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                
+                                <!-- AI Visualization -->
+                                <circle cx="200" cy="80" r="15" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+                                <path d="M185 80 L215 80 M200 65 L200 95" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Nosso Compromisso com a Sustentabilidade</h2>
-                <p class="text-gray-600 max-w-3xl mx-auto">Trabalhamos alinhados com o Objetivo de Desenvolvimento Sustentável 6.3 da ONU:</p>
-                <div class="bg-[#e6f2ff] p-4 rounded-lg max-w-3xl mx-auto mt-4 text-left">
-                    <p class="text-[#003366] italic">
-                        "Até 2030, melhorar a qualidade da água, reduzindo a poluição, eliminando despejo e minimizando a liberação de produtos químicos e materiais perigosos, reduzindo à metade a proporção de águas residuais não tratadas e aumentando substancialmente a reciclagem e reutilização segura globalmente."
+                
+                <div class="md:w-1/2 md:pl-10">
+                    <h3 class="text-2xl font-bold mb-6 text-gold">Apresentando o EkoVision</h3>
+                    <p class="text-gray-300 mb-6">
+                        O EkoVision é um óculos de sol inteligente projetado especificamente para pessoas com deficiência visual, combinando tecnologia avançada com um design elegante e discreto.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        Nosso dispositivo transforma informações visuais em descrições de áudio precisas, permitindo que os usuários "enxerguem" o mundo através do som, proporcionando maior independência e confiança no dia a dia.
+                    </p>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-tag text-gold"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-white">Preço acessível</h4>
+                            <p class="text-gold font-bold">R$ 1.499,00</p>
+                            <p class="text-sm text-gray-400">Parcelamento em até 12x sem juros</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-camera text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Câmera HD</h4>
+                    <p class="text-gray-300 text-center">
+                        Câmera de alta definição posicionada no canto superior direito da armação, capturando imagens do ambiente com precisão.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-brain text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">IA Avançada</h4>
+                    <p class="text-gray-300 text-center">
+                        Inteligência artificial que identifica objetos, textos, pessoas e ambientes, processando informações em tempo real.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-volume-up text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Som Direcional</h4>
+                    <p class="text-gray-300 text-center">
+                        Micro caixas de som embutidas nas hastes do óculos, proporcionando áudio claro sem bloquear sons ambientais importantes.
+                    </p>
+                </div>
+                
+                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
+                        <i class="fab fa-bluetooth-b text-2xl text-gold"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Conectividade</h4>
+                    <p class="text-gray-300 text-center">
+                        Conexão Bluetooth com o smartphone do usuário, permitindo processamento avançado e acesso à internet.
                     </p>
                 </div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMjQwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzAwYWVkOTt9LmNscy0ye2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPkUgV0VCIU5GXzA2PC90aXRsZT48ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPjxyZWN0IGNsYXNzPSJjbHMtMSIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIyNDAiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xNzQuMDgsODYuMDZjLTIuODMtMy4wNi01LjcxLTYuMTQtOC42NC05LjI5YTEuMDYsMS4wNiwwLDAsMC0xLjU5LDBjLTIuOTMsMy4xNS01LjgxLDYuMjMtOC42NCw5LjI5YTEuMDYsMS4wNiwwLDAsMCwuNzksMS43N2g1LjU2djE3LjU0YTEuMDYsMS4wNiwwLDAsMCwxLjA2LDEuMDZoNC4wNWExLjA2LDEuMDYsMCwwLDAsMS4wNi0xLjA2Vjg3LjgzaDUuNTZBMS4wNiwxLjA2LDAsMCwwLDE3NC4wOCw4Ni4wNloiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMjAsMTU0LjE3YTM0LjE3LDM0LjE3LDAsMSwxLDM0LjE3LTM0LjE3QTM0LjIxLDM0LjIxLDAsMCwxLDEyMCwxNTQuMTdabTAtNjAuMjlhMjYuMTIsMjYuMTIsMCwxLDAsMjYuMTIsMjYuMTJBMjYuMTUsMjYuMTUsMCwwLDAsMTIwLDkzLjg4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTEyMCw2NS44M2E1NC4xNyw1NC4xNywwLDEsMCw1NC4xNyw1NC4xN0E1NC4yMyw1NC4yMywwLDAsMCwxMjAsNjUuODNabTAsMTAwLjI5YTQ2LjEyLDQ2LjEyLDAsMSwxLDQ2LjEyLTQ2LjEyQTQ2LjE3LDQ2LjE3LDAsMCwxLDEyMCwxNjYuMTJaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMTIwLDEzMi4xMmExMi4xMiwxMi4xMiwwLDEsMSwxMi4xMi0xMi4xMkExMi4xMywxMi4xMywwLDAsMSwxMjAsMTMyLjEyWm0wLTE2LjE3YTQuMDUsNC4wNSwwLDEsMCw0LjA1LDQuMDVBNC4wNSw0LjA1LDAsMCwwLDEyMCwxMTUuOTVaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNODQuMDgsODYuMDZjLTIuODMtMy4wNi01LjcxLTYuMTQtOC42NC05LjI5YTEuMDYsMS4wNiwwLDAsMC0xLjU5LDBjLTIuOTMsMy4xNS01LjgxLDYuMjMtOC42NCw5LjI5YTEuMDYsMS4wNiwwLDAsMCwuNzksMS43N2g1LjU2djE3LjU0YTEuMDYsMS4wNiwwLDAsMCwxLjA2LDEuMDZoNC4wNWExLjA2LDEuMDYsMCwwLDAsMS4wNi0xLjA2Vjg3LjgzaDUuNTZBMS4wNiwxLjA2LDAsMCwwLDg0LjA4LDg2LjA2WiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTE3NC4wOCwxNDQuMjNjLTIuODMtMy4wNi01LjcxLTYuMTQtOC42NC05LjI5YTEuMDYsMS4wNiwwLDAsMC0xLjU5LDBjLTIuOTMsMy4xNS01LjgxLDYuMjMtOC42NCw5LjI5YTEuMDYsMS4wNiwwLDAsMCwuNzksMS43N2g1LjU2djE3LjU0YTEuMDYsMS4wNiwwLDAsMCwxLjA2LDEuMDZoNC4wNWExLjA2LDEuMDYsMCwwLDAsMS4wNi0xLjA2VjE0Nmg1LjU2QTEuMDYsMS4wNiwwLDAsMCwxNzQuMDgsMTQ0LjIzWiIvPjxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTg0LjA4LDE0NC4yM2MtMi44My0zLjA2LTUuNzEtNi4xNC04LjY0LTkuMjlhMS4wNiwxLjA2LDAsMCwwLTEuNTksMGMtMi45MywzLjE1LTUuODEsNi4yMy04LjY0LDkuMjlhMS4wNiwxLjA2LDAsMCwwLC43OSwxLjc3aDUuNTZ2MTcuNTRhMS4wNiwxLjA2LDAsMCwwLDEuMDYsMS4wNmg0LjA1YTEuMDYsMS4wNiwwLDAsMCwxLjA2LTEuMDZWMTQ2aDUuNTZBMS4wNiwxLjA2LDAsMCwwLDg0LjA4LDE0NC4yM1oiLz48L2c+PC9nPjwvc3ZnPg==" alt="ODS 6.3" class="w-full max-w-md mx-auto">
+            <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20">
+                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Como Funciona a Conectividade</h3>
+                
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <div class="relative">
+                            <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Glasses (Ray-Ban Style) -->
+                                <path d="M120 150 H280" stroke="#d4af37" stroke-width="2.5" class="animate-pulse-slow"/>
+                                
+                                <!-- Frame Front -->
+                                <path d="M120 150 L100 160 L100 180 C100 185, 105 190, 110 190 L150 190 C155 190, 160 185, 160 180 L160 160 L120 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                <path d="M280 150 L300 160 L300 180 C300 185, 295 190, 290 190 L250 190 C245 190, 240 185, 240 180 L240 160 L280 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Bridge -->
+                                <path d="M160 165 C180 160, 220 160, 240 165" stroke="#d4af37" stroke-width="1.5"/>
+                                
+                                <!-- Lenses (Dark) -->
+                                <path d="M110 160 L150 160 L150 180 C150 182, 148 184, 146 184 L114 184 C112 184, 110 182, 110 180 L110 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                <path d="M250 160 L290 160 L290 180 C290 182, 288 184, 286 184 L254 184 C252 184, 250 182, 250 180 L250 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                
+                                <!-- Temple Arms -->
+                                <path d="M100 170 L80 175" stroke="#d4af37" stroke-width="2"/>
+                                <path d="M300 170 L320 175" stroke="#d4af37" stroke-width="2"/>
+                                
+                                <!-- Mini Camera -->
+                                <circle cx="290" cy="155" r="4" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                <circle cx="290" cy="155" r="2" fill="#d4af37"/>
+                                <circle cx="290" cy="155" r="0.7" fill="#ffffff"/>
+                                
+                                <!-- Mini Speakers -->
+                                <rect x="85" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
+                                <rect x="307" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
+                                
+                                <!-- Smartphone -->
+                                <rect x="180" y="200" width="40" height="70" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <rect x="185" y="205" width="30" height="50" rx="2" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
+                                <circle cx="200" cy="265" r="3" fill="#d4af37"/>
+                                
+                                <!-- Cloud -->
+                                <path d="M200 80 C220 50, 260 50, 270 80 C290 80, 310 100, 290 120 C300 140, 280 160, 260 150 C250 170, 210 170, 200 150 C180 160, 160 140, 170 120 C150 100, 170 80, 200 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                <text x="200" y="120" text-anchor="middle" fill="#d4af37" font-size="14">AI Cloud</text>
+                                
+                                <!-- Connection Lines -->
+                                <path d="M150 170 C160 180, 180 190, 180 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                <path d="M250 170 C240 180, 220 190, 220 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                <path d="M200 200 C200 180, 200 160, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                
+                                <path d="M200 80 C200 100, 200 120, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
+                                
+                                <!-- Bluetooth Icon -->
+                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 195 L190 185 L200 175 L200 195" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                                
+                                <!-- WiFi Icon -->
+                                <path d="M190 100 C195 95, 205 95, 210 100" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M193 105 C197 101, 203 101, 207 105" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M196 110 C198 108, 202 108, 204 110" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                                <circle cx="200" cy="115" r="1.5" fill="#d4af37"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">1</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    O EkoVision conecta-se ao smartphone do usuário via <span class="text-gold">Bluetooth</span>, criando uma ponte de comunicação estável e de baixo consumo energético.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">2</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    A câmera do óculos captura imagens do ambiente e as envia para o aplicativo EkoVision instalado no smartphone.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">3</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    O aplicativo utiliza a conexão de internet do celular para enviar as imagens para nossa <span class="text-gold">IA na nuvem</span>, onde são processadas e interpretadas.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">4</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    As descrições geradas são enviadas de volta ao smartphone e transmitidas para as caixas de som do óculos, proporcionando feedback imediato ao usuário.
+                                </p>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <span class="text-gold font-bold">5</span>
+                                </div>
+                                <p class="text-gray-300">
+                                    Todo o processo ocorre em <span class="text-gold">tempo real</span>, com latência mínima, garantindo uma experiência fluida e natural para o usuário.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulation Section -->
+    <section id="simulation" class="py-20 bg-dark-light clip-path-slant-reverse relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">Simulação</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="max-w-4xl mx-auto bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
+                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Dashboard Interativo</h3>
+                <p class="text-gray-300 mb-8 text-center">
+                    Experimente como o EkoVision descreve diferentes ambientes. Selecione um cenário e ative a IA para ouvir uma simulação.
+                </p>
+                
+                <div class="flex flex-col md:flex-row items-center mb-8">
+                    <div class="md:w-1/2 mb-6 md:mb-0 flex justify-center">
+                        <div class="perspective-container">
+                            <div id="glasses-container" class="animate-float">
+                                <!-- New Ray-Ban style glasses -->
+                                <svg class="w-64 h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Frame Top Bar -->
+                                    <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
+                                    
+                                    <!-- Frame Front -->
+                                    <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                    <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                                    
+                                    <!-- Bridge -->
+                                    <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
+                                    
+                                    <!-- Lenses (Dark) -->
+                                    <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                    <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
+                                    
+                                    <!-- Temple Arms -->
+                                    <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
+                                    <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
+                                    
+                                    <!-- Mini Camera (top right corner) -->
+                                    <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
+                                    <circle cx="310" cy="90" r="3" fill="#d4af37"/>
+                                    <circle cx="310" cy="90" r="1" fill="#ffffff"/>
+                                    
+                                    <!-- Mini Speakers on Temple Arms -->
+                                    <!-- Left Speaker -->
+                                    <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                    <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
+                                    
+                                    <!-- Right Speaker -->
+                                    <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
+                                    <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
+                                    
+                                    <!-- Subtle Ray-Ban style logo hint on temple -->
+                                    <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
+                                    
+                                    <!-- Reflection on lenses -->
+                                    <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                    <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+                                    
+                                    <!-- Camera Active Indicator (hidden by default) -->
+                                    <circle id="camera-indicator" cx="310" cy="90" r="10" fill="#d4af37" fill-opacity="0.3" style="display: none;"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 md:pl-8">
+                        <div class="mb-6">
+                            <label for="scenario" class="block text-gold font-medium mb-2">Selecione o cenário:</label>
+                            <select id="scenario" class="w-full bg-dark-darker border border-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-gold">
+                                <option value="pharmacy">Farmácia</option>
+                                <option value="supermarket">Supermercado</option>
+                                <option value="street">Rua</option>
+                            </select>
+                        </div>
+                        
+                        <button id="activate-ai" class="w-full gold-button bg-gold text-dark-darker font-bold py-4 px-6 rounded-lg shadow-lg hover:bg-gold-dark transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-power-off mr-2"></i>
+                            Ativar IA
+                        </button>
+                    </div>
                 </div>
                 
-                <div>
-                    <h3 class="text-2xl font-semibold text-[#0056b3] mb-6">Nossas Iniciativas Sustentáveis</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-[#0056b3] text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-gray-900">Redução do Desperdício</h4>
-                                <p class="mt-2 text-gray-600">Nosso sistema de entrega sob demanda reduz o desperdício de água, entregando apenas o necessário quando necessário. Implementamos tecnologias de monitoramento para detectar vazamentos e evitar perdas.</p>
-                            </div>
+                <div id="result-container" class="bg-dark-light p-6 rounded-lg border border-gold/20 mb-8 hidden">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-comment-alt text-gold"></i>
                         </div>
-                        
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-[#0056b3] text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-gray-900">Tratamento Avançado</h4>
-                                <p class="mt-2 text-gray-600">Utilizamos métodos avançados de purificação que eliminam contaminantes e garantem água de qualidade superior, sem adição de produtos químicos nocivos. Nossos laboratórios realizam testes diários para garantir a pureza.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-[#0056b3] text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-gray-900">Reciclagem e Reutilização</h4>
-                                <p class="mt-2 text-gray-600">Implementamos sistemas de captação de água da chuva e reutilização de águas residuais tratadas para operações não-potáveis. Nossos recipientes são 100% recicláveis e incentivamos a devolução para reuso.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-[#0056b3] text-white">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-gray-900">Educação e Conscientização</h4>
-                                <p class="mt-2 text-gray-600">Promovemos campanhas educativas sobre o uso responsável da água e a importância da conservação dos recursos hídricos. Oferecemos workshops gratuitos para a comunidade sobre práticas sustentáveis.</p>
-                            </div>
-                        </div>
+                        <h4 class="text-xl font-semibold text-gold">Descrição da IA</h4>
                     </div>
                     
-                    <div class="mt-8">
-                        <h3 class="text-2xl font-semibold text-[#0056b3] mb-4">Nosso Impacto</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-gray-700 font-medium">Redução no desperdício</span>
-                                    <span class="text-[#0056b3] font-bold">30%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-bar-fill" style="width: 30%"></div>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-gray-700 font-medium">Água reciclada</span>
-                                    <span class="text-[#0056b3] font-bold">45%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-bar-fill" style="width: 45%"></div>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-gray-700 font-medium">Famílias atendidas</span>
-                                    <span class="text-[#0056b3] font-bold">10mil+</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-bar-fill" style="width: 75%"></div>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 rounded-lg shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-gray-700 font-medium">Embalagens recicladas</span>
-                                    <span class="text-[#0056b3] font-bold">85%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-bar-fill" style="width: 85%"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="ai-description" class="text-white bg-dark-darker p-4 rounded-lg border border-gold/10 mb-4">
+                        Aguardando ativação...
+                    </div>
+                    
+                    <div class="flex items-center text-sm text-gray-400">
+                        <i class="fas fa-info-circle mr-2 text-gold"></i>
+                        <span>Tempo de resposta: <span id="response-time">0.0</span> segundos</span>
                     </div>
                 </div>
+                
+                <div class="flex justify-center">
+                    <button id="emergency-button" class="gold-button bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        Chamar ajuda
+                    </button>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="mt-16 bg-[#e6f2ff] rounded-lg p-8">
-                <h3 class="text-2xl font-semibold text-[#003366] mb-6 text-center">Metas para 2030</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-semibold text-[#0056b3] mb-3">Redução de Poluentes</h4>
-                        <p class="text-gray-600 mb-4">Eliminar completamente o uso de produtos químicos nocivos em nossos processos de tratamento e distribuição de água.</p>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: 60%"></div>
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-dark-darker">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+                <span class="relative inline-block">
+                    <span class="text-gold">Nossa Equipe</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
+                </span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
                         </div>
-                        <div class="text-right mt-2 text-sm text-gray-500">60% concluído</div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-semibold text-[#0056b3] mb-3">Tratamento de Águas Residuais</h4>
-                        <p class="text-gray-600 mb-4">Tratar 100% das águas residuais geradas em nossas operações e incentivar o mesmo em nossos parceiros.</p>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: 75%"></div>
-                        </div>
-                        <div class="text-right mt-2 text-sm text-gray-500">75% concluído</div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Thiago Oliveira</h3>
+                        <p class="text-sm text-gold/70 mb-4">CEO e Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Visionário por trás do EkoVision, com experiência em tecnologias assistivas e inovação social.
+                        </p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="text-lg font-semibold text-[#0056b3] mb-3">Reciclagem e Reutilização</h4>
-                        <p class="text-gray-600 mb-4">Alcançar 95% de reciclagem em todas as embalagens e implementar sistemas de reutilização de água em todas as operações.</p>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: 85%"></div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
                         </div>
-                        <div class="text-right mt-2 text-sm text-gray-500">85% concluído</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Vinicius Sampaio</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em inteligência artificial e sistemas de visão computacional.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Vitor Alves</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Responsável pelo design e ergonomia do produto, focado na experiência do usuário.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
+                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
+                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-gold"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-1">Luiz Renato</h3>
+                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
+                        <p class="text-gray-300 text-sm">
+                            Especialista em desenvolvimento de software e integração de sistemas.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Order Section -->
-    <section id="order" class="py-16 bg-gray-50">
+    <!-- Footer -->
+    <footer class="bg-dark-darker py-10 border-t border-gold/20">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Pedido Rápido</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Precisa de água com urgência? Faça seu pedido em segundos e receba rapidamente na sua casa.</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
-                <form id="quick-order-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="quick-name" class="block text-gray-700 font-medium mb-2">Nome Completo</label>
-                            <input type="text" id="quick-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                        <div>
-                            <label for="quick-phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
-                            <input type="tel" id="quick-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="quick-address" class="block text-gray-700 font-medium mb-2">Endereço Completo</label>
-                        <input type="text" id="quick-address" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                    </div>
-                    
-                    <div>
-                        <label for="quick-quantity" class="block text-gray-700 font-medium mb-2">Quantidade de Água (litros)</label>
-                        <input type="number" id="quick-quantity" min="20" max="1000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        <p class="text-sm text-gray-500 mt-1">Mínimo: 20 litros</p>
-                    </div>
-                    
-                    <div>
-                        <label for="quick-date" class="block text-gray-700 font-medium mb-2">Data de Entrega Desejada</label>
-                        <input type="date" id="quick-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                    </div>
-                    
-                    <div>
-                        <label for="quick-notes" class="block text-gray-700 font-medium mb-2">Observações (opcional)</label>
-                        <textarea id="quick-notes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]"></textarea>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-semibold">Solicitar Entrega</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="mt-12 max-w-3xl mx-auto">
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-semibold text-[#003366] mb-4">Como funciona o pedido rápido?</h3>
-                    <div class="space-y-4">
-                        <div class="step-item pb-6">
-                            <h4 class="font-medium text-gray-900">Preencha o formulário acima</h4>
-                            <p class="text-gray-600">Informe seus dados e a quantidade de água necessária.</p>
-                        </div>
-                        <div class="step-item pb-6">
-                            <h4 class="font-medium text-gray-900">Receba a confirmação</h4>
-                            <p class="text-gray-600">Você receberá uma notificação confirmando seu pedido e o horário estimado de entrega.</p>
-                        </div>
-                        <div class="step-item">
-                            <h4 class="font-medium text-gray-900">Água entregue na sua porta</h4>
-                            <p class="text-gray-600">Nossa equipe entregará a água no endereço informado, no mesmo dia para pedidos feitos até às 16h.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Registration Section -->
-    <section id="register" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Cadastre-se</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Torne-se um cliente AquaNow e tenha acesso a todos os nossos serviços.</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
-                <form id="registration-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="full-name" class="block text-gray-700 font-medium mb-2">Nome Completo</label>
-                            <input type="text" id="full-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                        <div>
-                            <label for="cpf" class="block text-gray-700 font-medium mb-2">CPF</label>
-                            <input type="text" id="cpf" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
-                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="address" class="block text-gray-700 font-medium mb-2">Endereço Completo</label>
-                        <input type="text" id="address" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label for="city" class="block text-gray-700 font-medium mb-2">Cidade</label>
-                            <input type="text" id="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                        <div>
-                            <label for="state" class="block text-gray-700 font-medium mb-2">Estado</label>
-                            <input type="text" id="state" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                        <div>
-                            <label for="zip" class="block text-gray-700 font-medium mb-2">CEP</label>
-                            <input type="text" id="zip" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="water-usage" class="block text-gray-700 font-medium mb-2">Quantidade de água utilizada por dia (litros por pessoa)</label>
-                            <input type="number" id="water-usage" min="1" max="180" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                            <p class="text-sm text-gray-500 mt-1">Máximo: 180 litros por pessoa</p>
-                        </div>
-                        <div>
-                            <label for="household-size" class="block text-gray-700 font-medium mb-2">Número de pessoas na residência</label>
-                            <input type="number" id="household-size" min="1" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0056b3]" required>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-[#e6f2ff] p-4 rounded-lg">
-                        <h4 class="font-medium text-[#003366] mb-2">Benefícios do cadastro:</h4>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Pedidos mais rápidos com seus dados salvos
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Histórico de pedidos e consumo
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Descontos exclusivos para clientes cadastrados
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 mr-2 text-[#0056b3] mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Notificações sobre entregas e promoções
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="terms" type="checkbox" class="h-4 w-4 text-[#0056b3] border-gray-300 rounded focus:ring-[#0056b3]" required>
-                        </div>
-                        <div class="ml-3 text-sm">
-                            <label for="terms" class="text-gray-700">Concordo com os <a href="#" class="text-[#0056b3] hover:underline">Termos de Serviço</a> e <a href="#" class="text-[#0056b3] hover:underline">Política de Privacidade</a></label>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center">
-                        <button type="submit" class="btn-primary px-8 py-3 rounded-lg font-semibold">Completar Cadastro</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-[#003366] mb-4">Entre em Contato</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Estamos sempre disponíveis para ajudar. Entre em contato conosco para mais informações.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
-                    <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-[#e6f2ff] text-[#0056b3] mb-4">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#home" class="flex items-center space-x-2">
+                        <svg class="w-8 h-8" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- New Logo: Stylized E with sound wave -->
+                            <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
+                            <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Sound wave element -->
+                            <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
                         </svg>
+                        <span class="text-xl font-bold text-gold">EkoVision</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">O mundo em som.</p>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0">
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">&copy; 2023 EkoVision. Todos os direitos reservados.</p>
+                    <p class="text-gray-500 text-sm mt-1">Desenvolvido com ❤️ para acessibilidade</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Simulation Functionality
+        const activateAiButton = document.getElementById('activate-ai');
+        const resultContainer = document.getElementById('result-container');
+        const aiDescription = document.getElementById('ai-description');
+        const responseTime = document.getElementById('response-time');
+        const scenarioSelect = document.getElementById('scenario');
+        const cameraIndicator = document.getElementById('camera-indicator');
+        const glassesContainer = document.getElementById('glasses-container');
+        const emergencyButton = document.getElementById('emergency-button');
+        
+        const descriptions = {
+            pharmacy: "Você está em uma farmácia. À sua frente, na prateleira central, encontra-se o produto: Dipirona 500mg. Preço: R$ 8,99. À direita há uma seção de cosméticos. À esquerda está o balcão de atendimento a aproximadamente 3 metros.",
+            supermarket: "Você está no corredor de cereais de um supermercado. À sua frente está: Arroz Integral Tipo 1. Preço: R$ 22,50 por kg. Promoção: leve 2kg, pague R$ 40,00. Corredor de laticínios à direita a aproximadamente 5 metros.",
+            street: "Você está em uma calçada. À sua frente há uma faixa de pedestres a 2 metros. Semáforo está vermelho para pedestres. Há uma parada de ônibus à direita a aproximadamente 10 metros. Detecto movimento de pessoas atravessando à sua esquerda."
+        };
+        
+        activateAiButton.addEventListener('click', () => {
+            // Show camera active indicator
+            cameraIndicator.style.display = 'block';
+            
+            // Add processing animation to glasses
+            glassesContainer.classList.remove('animate-float');
+            glassesContainer.classList.add('animate-pulse-slow');
+            
+            // Show loading state
+            resultContainer.classList.remove('hidden');
+            aiDescription.textContent = "Processando imagem...";
+            
+            // Simulate processing time
+            const processingTime = Math.random() * (1.5 - 0.8) + 0.8;
+            
+            setTimeout(() => {
+                // Get selected scenario
+                const scenario = scenarioSelect.value;
+                
+                // Update description
+                aiDescription.textContent = descriptions[scenario];
+                responseTime.textContent = processingTime.toFixed(1);
+                
+                // Return glasses to normal state
+                setTimeout(() => {
+                    cameraIndicator.style.display = 'none';
+                    glassesContainer.classList.remove('animate-pulse-slow');
+                    glassesContainer.classList.add('animate-float');
+                }, 1000);
+                
+            }, processingTime * 1000);
+        });
+        
+        emergencyButton.addEventListener('click', () => {
+            // Create emergency modal
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80';
+            modal.innerHTML = `
+                <div class="bg-dark-light p-8 rounded-xl max-w-md w-full border border-red-500 shadow-2xl">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center animate-pulse">
+                            <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-sem<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94a1a3a22306f1bb',t:'MTc0ODk3OTM4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-red-500">Emergência Ativada</h3>
+                    <p class="text-gray-300 mb-6 text-center">
+                        Enviando sua localização atual para seus contatos de emergência.
+                    </p>
+                    <div class="bg-dark-darker p-4 rounded-lg mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Status:</span>
+                            <span class="text-green-500">Localização enviada</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-gray-400">Coordenadas:</span>
+                            <span class="text-white">-23.5505, -46.6333</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Contatos notificados:</span>
+                            <span class="text-white">3</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center">
+                        <button id="close-emergency" class="bg-white text-red-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300">
+                            Fechar
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add event listener to close button
+            document.getElementById('close-emergency').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94a30c5087aef1d5',t:'MTc0ODk5NDE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
