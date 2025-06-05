@@ -1,830 +1,525 @@
 
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EkoVision - O mundo em som</title>
+    <title>AquaNow - Água fresca, quando você precisa</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            light: '#f5d77f',
-                            DEFAULT: '#d4af37',
-                            dark: '#b8860b',
-                        },
-                        dark: {
-                            light: '#2d2d2d',
-                            DEFAULT: '#1a1a1a',
-                            darker: '#121212',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;600&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
-        
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --primary: #005f99;
+            --white: #ffffff;
+            --light-blue: #e6f3fa;
+            --medium-blue: #80afcf;
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Lora', serif;
+            color: #333;
+            background-color: var(--white);
         }
         
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
         }
         
-        .gold-gradient {
-            background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b8860b 100%);
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
         }
         
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary);
         }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
         }
         
-        .animate-pulse-slow {
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .vintage-border {
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
         
-        .clip-path-slant {
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        .vintage-card {
+            background-color: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
         }
         
-        .clip-path-slant-reverse {
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+        .form-input {
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-family: 'Lora', serif;
         }
         
-        .perspective-container {
-            perspective: 1000px;
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 95, 153, 0.2);
         }
         
-        .rotate-y-animation {
-            animation: rotateY 8s infinite linear;
-            transform-style: preserve-3d;
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #444;
         }
         
-        @keyframes rotateY {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        .nav-link {
+        .section-title {
             position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
         }
         
-        .nav-link::after {
-            content: '';
+        .section-title:after {
+            content: "";
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
-            background-color: #d4af37;
-            transition: width 0.3s ease;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
         }
         
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .gold-button {
+        .water-drop {
             position: relative;
-            overflow: hidden;
-            z-index: 1;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            margin-right: 10px;
         }
         
-        .gold-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-            z-index: -1;
-        }
-        
-        .gold-button:hover::before {
-            left: 100%;
-        }
-        
-        .glasses-svg {
-            filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.3));
+        .active-tab {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
         }
     </style>
 </head>
-<body class="bg-dark-darker text-white">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-dark-darker bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#home" class="flex items-center space-x-2">
-                <svg class="w-10 h-10" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- New Logo: Stylized E with sound wave -->
-                    <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                    <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                    <!-- Sound wave element -->
-                    <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                <span class="text-xl font-bold text-gold">EkoVision</span>
-            </a>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="nav-link text-white hover:text-gold transition-colors">Início</a>
-                <a href="#problem" class="nav-link text-white hover:text-gold transition-colors">O Problema</a>
-                <a href="#solution" class="nav-link text-white hover:text-gold transition-colors">A Solução</a>
-                <a href="#simulation" class="nav-link text-white hover:text-gold transition-colors">Simulação</a>
-                <a href="#team" class="nav-link text-white hover:text-gold transition-colors">Equipe</a>
-            </div>
-            
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-dark-darker border-t border-gold-dark">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-                <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
-                <a href="#problem" class="text-white hover:text-gold transition-colors">O Problema</a>
-                <a href="#solution" class="text-white hover:text-gold transition-colors">A Solução</a>
-                <a href="#simulation" class="text-white hover:text-gold transition-colors">Simulação</a>
-                <a href="#team" class="text-white hover:text-gold transition-colors">Equipe</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        <div class="absolute inset-0 bg-dark-darker opacity-90 z-0"></div>
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold/10 via-dark-darker to-dark-darker"></div>
-            <div class="h-full w-full flex">
-                <div class="w-1/3 h-full bg-gold/5 transform -skew-x-12 translate-x-20 opacity-30"></div>
-            </div>
-        </div>
-        
-        <div class="container mx-auto px-4 py-16 z-10 relative">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-                        <span class="text-white">Eko</span><span class="text-gold">Vision</span>
-                    </h1>
-                    <h2 class="text-2xl md:text-3xl font-light mb-6 text-gold italic">O mundo em som.</h2>
-                    <p class="text-lg mb-8 text-gray-300 max-w-lg">
-                        Revolucionando a experiência de pessoas com deficiência visual através de óculos inteligentes que descrevem o mundo ao redor com precisão e elegância.
-                    </p>
-                    <a href="#solution" class="inline-block gold-button bg-gold text-dark-darker font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gold-dark transition-all duration-300 transform hover:-translate-y-1">
-                        Saiba mais
-                    </a>
-                </div>
-                
-                <div class="md:w-1/2 perspective-container">
-                    <div class="animate-float">
-                        <!-- New Ray-Ban style glasses -->
-                        <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Frame Top Bar -->
-                            <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                            
-                            <!-- Frame Front -->
-                            <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            
-                            <!-- Bridge -->
-                            <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                            
-                            <!-- Lenses (Dark) -->
-                            <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                            <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                            
-                            <!-- Temple Arms -->
-                            <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                            <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                            
-                            <!-- Mini Camera (top right corner) -->
-                            <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                            <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                            <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                            
-                            <!-- Mini Speakers on Temple Arms -->
-                            <!-- Left Speaker -->
-                            <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                            <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                            
-                            <!-- Right Speaker -->
-                            <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                            <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                            
-                            <!-- Subtle Ray-Ban style logo hint on temple -->
-                            <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                            
-                            <!-- Reflection on lenses -->
-                            <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                            <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
+<body>
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-md py-4">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="mr-4">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M30 5C25.5 5 15 25 15 40C15 48.8 21.2 55 30 55C38.8 55 45 48.8 45 40C45 25 34.5 5 30 5Z" fill="#005f99"/>
+                            <path d="M30 50C35.5 50 40 45.5 40 40C40 30 33.5 15 30 15C26.5 15 20 30 20 40C20 45.5 24.5 50 30 50Z" fill="#ffffff"/>
+                            <path d="M30 45C33 45 35 43 35 40C35 35 31.5 25 30 25C28.5 25 25 35 25 40C25 43 27 45 30 45Z" fill="#80afcf"/>
                         </svg>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#problem" aria-label="Rolar para baixo">
-                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </a>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section id="problem" class="py-20 bg-dark-light clip-path-slant relative">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                    <span class="relative inline-block">
-                        <span class="text-gold">O Problema</span>
-                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                    </span>
-                </h2>
-                
-                <div class="bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
-                    <div class="flex flex-col md:flex-row items-center mb-10">
-                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
-                            <div class="w-32 h-32 rounded-full bg-dark-light border-2 border-gold flex items-center justify-center">
-                                <i class="fas fa-eye-slash text-5xl text-gold"></i>
-                            </div>
-                        </div>
-                        <div class="md:w-2/3 md:pl-8">
-                            <h3 class="text-xl md:text-2xl font-semibold mb-4 text-gold">Desafios diários enfrentados</h3>
-                            <p class="text-gray-300 mb-4">
-                                Pessoas com deficiência visual enfrentam obstáculos significativos ao navegar em ambientes cotidianos, especialmente em locais com muitas informações visuais.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-shopping-cart text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Supermercados</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Identificar produtos, preços e informações nutricionais torna-se uma tarefa quase impossível sem assistência.
-                            </p>
-                        </div>
-                        
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-pills text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Farmácias</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Diferenciar medicamentos, ler bulas e instruções de dosagem representa um desafio crítico para a saúde.
-                            </p>
-                        </div>
-                        
-                        <div class="bg-dark-light p-6 rounded-lg border-l-4 border-gold transform transition-transform hover:scale-105">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                                    <i class="fas fa-city text-gold"></i>
-                                </div>
-                                <h4 class="text-lg font-semibold">Espaços Públicos</h4>
-                            </div>
-                            <p class="text-gray-300">
-                                Navegar em ruas, identificar estabelecimentos e ler placas informativas são barreiras constantes à autonomia.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-dark-light p-6 rounded-lg border border-gold/30">
-                        <h4 class="text-xl font-semibold mb-4 text-gold">Impacto na Independência</h4>
-                        <p class="text-gray-300">
-                            A falta de acesso a informações visuais limita significativamente a autonomia e independência das pessoas com deficiência visual, criando uma dependência constante de terceiros para tarefas cotidianas que poderiam ser realizadas de forma independente com a tecnologia adequada.
-                        </p>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-[#005f99]">AquaNow</h1>
+                        <p class="text-sm italic text-gray-600">Água fresca, quando você precisa.</p>
                     </div>
                 </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-[#005f99] transition duration-300 active-tab">Início</a>
+                    <a href="#cadastro" class="text-gray-700 hover:text-[#005f99] transition duration-300">Cadastro</a>
+                    <a href="#sobre" class="text-gray-700 hover:text-[#005f99] transition duration-300">Sobre Nós</a>
+                    <a href="#contato" class="text-gray-700 hover:text-[#005f99] transition duration-300">Contato</a>
+                </nav>
+                <button class="md:hidden text-[#005f99]" id="mobile-menu-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-        </div>
-        
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden" style="height: 70px;">
-            <svg class="absolute bottom-0 w-full h-20 text-dark-darker" preserveAspectRatio="none" viewBox="0 0 1440 100">
-                <path fill="currentColor" d="M0,0 L1440,0 L1440,100 L0,30 Z"></path>
-            </svg>
-        </div>
-    </section>
+            <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-[#005f99]">Início</a>
+                <a href="#cadastro" class="block py-2 text-gray-700 hover:text-[#005f99]">Cadastro</a>
+                <a href="#sobre" class="block py-2 text-gray-700 hover:text-[#005f99]">Sobre Nós</a>
+                <a href="#contato" class="block py-2 text-gray-700 hover:text-[#005f99]">Contato</a>
+            </div>
+        </header>
 
-    <!-- Solution Section -->
-    <section id="solution" class="py-20 bg-dark-darker relative">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">A Solução</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="flex flex-col md:flex-row items-center mb-16">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <div class="perspective-container">
-                        <div class="animate-float">
-                            <!-- New Ray-Ban style glasses -->
-                            <svg class="w-full h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Frame Top Bar -->
-                                <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                                
-                                <!-- Frame Front -->
-                                <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <!-- Bridge -->
-                                <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <!-- Lenses (Dark) -->
-                                <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <!-- Temple Arms -->
-                                <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                                <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                                
-                                <!-- Mini Camera (top right corner) -->
-                                <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                                <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                                
-                                <!-- Mini Speakers on Temple Arms -->
-                                <!-- Left Speaker -->
-                                <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <!-- Right Speaker -->
-                                <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <!-- Subtle Ray-Ban style logo hint on temple -->
-                                <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                                
-                                <!-- Reflection on lenses -->
-                                <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                
-                                <!-- AI Visualization -->
-                                <circle cx="200" cy="80" r="15" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
-                                <path d="M185 80 L215 80 M200 65 L200 95" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+        <main class="flex-grow">
+            <!-- Home Section -->
+            <section id="home" class="py-12 md:py-20 bg-gradient-to-b from-[#e6f3fa] to-white">
+                <div class="container mx-auto px-4">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#005f99]">Apoiando o Objetivo de Desenvolvimento Sustentável 6.3 da ONU</h2>
+                            <p class="text-lg mb-6 leading-relaxed">A AquaNow está comprometida em contribuir para a meta global de melhorar a qualidade da água até 2030, reduzindo a poluição e promovendo a reutilização segura dos recursos hídricos.</p>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="water-drop"></div>
+                                    <span class="font-semibold">Redução da poluição hídrica</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="water-drop"></div>
+                                    <span class="font-semibold">Tratamento de águas residuais</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="water-drop"></div>
+                                    <span class="font-semibold">Reutilização segura da água</span>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <a href="#cadastro" class="btn-primary inline-block">Cadastre-se agora</a>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center">
+                            <div class="vintage-card max-w-md">
+                                <div class="text-center mb-6">
+                                    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+                                        <path d="M40 20H80V100H40V20Z" fill="#005f99"/>
+                                        <path d="M45 25H75V95H45V25Z" fill="#ffffff"/>
+                                        <path d="M50 30H70V40H50V30Z" fill="#80afcf"/>
+                                        <path d="M40 20C40 20 35 30 35 35C35 40 40 40 40 40H80C80 40 85 40 85 35C85 30 80 20 80 20H40Z" fill="#005f99"/>
+                                        <path d="M55 50H65V85H55V50Z" fill="#e6f3fa"/>
+                                        <circle cx="60" cy="45" r="5" fill="#ffffff"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-center mb-4">Cadastre-se e receba água potável em casa – gratuitamente!</h3>
+                                <p class="text-center mb-6">Nosso programa, financiado por parceiros públicos, entrega água tratada diretamente na sua residência sem custo algum.</p>
+                                <div class="text-center">
+                                    <a href="#cadastro" class="btn-outline inline-block">Saiba mais</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cadastro Section -->
+            <section id="cadastro" class="py-12 md:py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="section-title text-3xl font-bold text-center mb-12">Cadastre-se para Receber Água Potável</h2>
+                    <div class="max-w-3xl mx-auto vintage-card">
+                        <form id="cadastroForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="nome" class="form-label">Nome Completo*</label>
+                                    <input type="text" id="nome" name="nome" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="form-label">E-mail*</label>
+                                    <input type="email" id="email" name="email" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="celular" class="form-label">Número de Celular*</label>
+                                    <input type="tel" id="celular" name="celular" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="cpf" class="form-label">CPF*</label>
+                                    <input type="text" id="cpf" name="cpf" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="estado" class="form-label">Estado*</label>
+                                    <select id="estado" name="estado" class="form-input" required>
+                                        <option value="">Selecione um estado</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="TO">Tocantins</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="cidade" class="form-label">Cidade*</label>
+                                    <input type="text" id="cidade" name="cidade" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="bairro" class="form-label">Bairro*</label>
+                                    <input type="text" id="bairro" name="bairro" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="rua" class="form-label">Rua*</label>
+                                    <input type="text" id="rua" name="rua" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="numero" class="form-label">Número*</label>
+                                    <input type="text" id="numero" name="numero" class="form-input" required>
+                                </div>
+                                <div>
+                                    <label for="complemento" class="form-label">Complemento</label>
+                                    <input type="text" id="complemento" name="complemento" class="form-input" placeholder="Apto, Bloco, etc.">
+                                </div>
+                                <div>
+                                    <label for="consumo" class="form-label">Quantidade de litros de água usados por dia</label>
+                                    <input type="number" id="consumo" name="consumo" class="form-input" placeholder="Individual ou familiar">
+                                </div>
+                            </div>
+                            <div class="text-center mt-8">
+                                <button type="submit" class="btn-primary">Enviar e calcular consumo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resultado Section (hidden by default) -->
+            <section id="resultado" class="py-12 md:py-20 bg-[#e6f3fa] hidden">
+                <div class="container mx-auto px-4">
+                    <h2 class="section-title text-3xl font-bold text-center mb-12">Seu Cadastro foi Confirmado!</h2>
+                    <div class="max-w-3xl mx-auto vintage-card">
+                        <div class="text-center mb-8">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+                                <circle cx="40" cy="40" r="38" stroke="#005f99" stroke-width="4" fill="none"/>
+                                <path d="M25 40L35 50L55 30" stroke="#005f99" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
+                        <h3 class="text-2xl font-bold text-center mb-4">Obrigado por se cadastrar!</h3>
+                        <div class="mb-6 p-4 bg-[#e6f3fa] rounded-lg">
+                            <p class="text-lg font-semibold mb-2">Estimativa de consumo mensal:</p>
+                            <p class="text-3xl font-bold text-[#005f99]" id="consumoMensal">0 litros</p>
+                        </div>
+                        <div class="space-y-4 mb-8">
+                            <p>Um caminhão da AquaNow irá entregar água tratada de forma segura no endereço informado em breve.</p>
+                            <p>Não haverá custo algum para você, pois o programa é financiado pela prefeitura, estado e órgãos parceiros.</p>
+                            <p class="font-semibold">Agradecemos pelo seu compromisso com o meio ambiente e a preservação da água!</p>
+                        </div>
+                        <div class="text-center">
+                            <button id="voltarInicio" class="btn-outline">Voltar ao início</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="md:w-1/2 md:pl-10">
-                    <h3 class="text-2xl font-bold mb-6 text-gold">Apresentando o EkoVision</h3>
-                    <p class="text-gray-300 mb-6">
-                        O EkoVision é um óculos de sol inteligente projetado especificamente para pessoas com deficiência visual, combinando tecnologia avançada com um design elegante e discreto.
-                    </p>
-                    <p class="text-gray-300 mb-6">
-                        Nosso dispositivo transforma informações visuais em descrições de áudio precisas, permitindo que os usuários "enxerguem" o mundo através do som, proporcionando maior independência e confiança no dia a dia.
-                    </p>
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                            <i class="fas fa-tag text-gold"></i>
-                        </div>
+            </section>
+
+            <!-- Sobre Section -->
+            <section id="sobre" class="py-12 md:py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <h2 class="section-title text-3xl font-bold text-center mb-12">Sobre a AquaNow</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h4 class="text-xl font-semibold text-white">Preço acessível</h4>
-                            <p class="text-gold font-bold">R$ 1.499,00</p>
-                            <p class="text-sm text-gray-400">Parcelamento em até 12x sem juros</p>
+                            <h3 class="text-2xl font-bold mb-4 text-[#005f99]">Nossa Missão</h3>
+                            <p class="mb-6 leading-relaxed">A AquaNow tem como missão fornecer água de qualidade gratuitamente, ajudando a alcançar a meta ODS 6.3 da ONU. Trabalhamos incansavelmente para garantir que todas as pessoas tenham acesso à água potável, contribuindo para um futuro mais sustentável.</p>
+                            <h3 class="text-2xl font-bold mb-4 text-[#005f99]">Parcerias Institucionais</h3>
+                            <p class="mb-6 leading-relaxed">Nosso programa é possível graças às parcerias com órgãos públicos, incluindo prefeituras, secretarias estaduais de meio ambiente e recursos hídricos, além de organizações não-governamentais dedicadas à preservação ambiental.</p>
+                            <div class="flex flex-wrap gap-4 mt-8">
+                                <div class="bg-gray-100 p-3 rounded-lg">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="60" height="60" rx="4" fill="#f0f0f0"/>
+                                        <text x="30" y="35" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Prefeitura</text>
+                                    </svg>
+                                </div>
+                                <div class="bg-gray-100 p-3 rounded-lg">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="60" height="60" rx="4" fill="#f0f0f0"/>
+                                        <text x="30" y="35" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Secretaria</text>
+                                    </svg>
+                                </div>
+                                <div class="bg-gray-100 p-3 rounded-lg">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="60" height="60" rx="4" fill="#f0f0f0"/>
+                                        <text x="30" y="35" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">ONG</text>
+                                    </svg>
+                                </div>
+                                <div class="bg-gray-100 p-3 rounded-lg">
+                                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="60" height="60" rx="4" fill="#f0f0f0"/>
+                                        <text x="30" y="35" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">ONU</text>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-camera text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Câmera HD</h4>
-                    <p class="text-gray-300 text-center">
-                        Câmera de alta definição posicionada no canto superior direito da armação, capturando imagens do ambiente com precisão.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-brain text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">IA Avançada</h4>
-                    <p class="text-gray-300 text-center">
-                        Inteligência artificial que identifica objetos, textos, pessoas e ambientes, processando informações em tempo real.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-volume-up text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Som Direcional</h4>
-                    <p class="text-gray-300 text-center">
-                        Micro caixas de som embutidas nas hastes do óculos, proporcionando áudio claro sem bloquear sons ambientais importantes.
-                    </p>
-                </div>
-                
-                <div class="bg-dark-light p-6 rounded-lg border border-gold/20 transform transition-all hover:border-gold hover:-translate-y-2">
-                    <div class="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-bluetooth-b text-2xl text-gold"></i>
-                    </div>
-                    <h4 class="text-xl font-semibold mb-3 text-center text-gold">Conectividade</h4>
-                    <p class="text-gray-300 text-center">
-                        Conexão Bluetooth com o smartphone do usuário, permitindo processamento avançado e acesso à internet.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="bg-dark-light p-8 rounded-xl shadow-xl border border-gold/20">
-                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Como Funciona a Conectividade</h3>
-                
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-8 md:mb-0">
-                        <div class="relative">
-                            <svg class="w-full h-auto" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Glasses (Ray-Ban Style) -->
-                                <path d="M120 150 H280" stroke="#d4af37" stroke-width="2.5" class="animate-pulse-slow"/>
-                                
-                                <!-- Frame Front -->
-                                <path d="M120 150 L100 160 L100 180 C100 185, 105 190, 110 190 L150 190 C155 190, 160 185, 160 180 L160 160 L120 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                <path d="M280 150 L300 160 L300 180 C300 185, 295 190, 290 190 L250 190 C245 190, 240 185, 240 180 L240 160 L280 150" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <!-- Bridge -->
-                                <path d="M160 165 C180 160, 220 160, 240 165" stroke="#d4af37" stroke-width="1.5"/>
-                                
-                                <!-- Lenses (Dark) -->
-                                <path d="M110 160 L150 160 L150 180 C150 182, 148 184, 146 184 L114 184 C112 184, 110 182, 110 180 L110 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                <path d="M250 160 L290 160 L290 180 C290 182, 288 184, 286 184 L254 184 C252 184, 250 182, 250 180 L250 160" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                
-                                <!-- Temple Arms -->
-                                <path d="M100 170 L80 175" stroke="#d4af37" stroke-width="2"/>
-                                <path d="M300 170 L320 175" stroke="#d4af37" stroke-width="2"/>
-                                
-                                <!-- Mini Camera -->
-                                <circle cx="290" cy="155" r="4" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                <circle cx="290" cy="155" r="2" fill="#d4af37"/>
-                                <circle cx="290" cy="155" r="0.7" fill="#ffffff"/>
-                                
-                                <!-- Mini Speakers -->
-                                <rect x="85" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
-                                <rect x="307" y="173" width="8" height="4" rx="2" fill="#121212" stroke="#d4af37" stroke-width="0.7"/>
-                                
-                                <!-- Smartphone -->
-                                <rect x="180" y="200" width="40" height="70" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <rect x="185" y="205" width="30" height="50" rx="2" fill="#1a1a1a" stroke="#d4af37" stroke-width="1"/>
-                                <circle cx="200" cy="265" r="3" fill="#d4af37"/>
-                                
-                                <!-- Cloud -->
-                                <path d="M200 80 C220 50, 260 50, 270 80 C290 80, 310 100, 290 120 C300 140, 280 160, 260 150 C250 170, 210 170, 200 150 C180 160, 160 140, 170 120 C150 100, 170 80, 200 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                <text x="200" y="120" text-anchor="middle" fill="#d4af37" font-size="14">AI Cloud</text>
-                                
-                                <!-- Connection Lines -->
-                                <path d="M150 170 C160 180, 180 190, 180 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                <path d="M250 170 C240 180, 220 190, 220 200" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                <path d="M200 200 C200 180, 200 160, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                
-                                <path d="M200 80 C200 100, 200 120, 200 150" stroke="#d4af37" stroke-width="1" stroke-dasharray="4 2" class="animate-pulse-slow"/>
-                                
-                                <!-- Bluetooth Icon -->
-                                <path d="M200 175 L210 185 L200 195 L210 205 L200 215 L200 195 L190 205 L200 195 L190 185 L200 175 L200 195" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-                                
-                                <!-- WiFi Icon -->
-                                <path d="M190 100 C195 95, 205 95, 210 100" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M193 105 C197 101, 203 101, 207 105" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M196 110 C198 108, 202 108, 204 110" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                                <circle cx="200" cy="115" r="1.5" fill="#d4af37"/>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 md:pl-8">
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">1</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    O EkoVision conecta-se ao smartphone do usuário via <span class="text-gold">Bluetooth</span>, criando uma ponte de comunicação estável e de baixo consumo energético.
-                                </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="vintage-card">
+                                <svg width="100%" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+                                    <rect width="200" height="120" rx="4" fill="#005f99"/>
+                                    <rect x="10" y="10" width="180" height="100" rx="2" fill="#ffffff"/>
+                                    <rect x="20" y="20" width="160" height="80" rx="2" fill="#e6f3fa"/>
+                                    <path d="M20 130H180V150C180 155.523 175.523 160 170 160H30C24.4772 160 20 155.523 20 150V130Z" fill="#005f99"/>
+                                    <circle cx="40" cy="145" r="10" fill="#ffffff"/>
+                                    <circle cx="70" cy="145" r="10" fill="#ffffff"/>
+                                    <circle cx="130" cy="145" r="10" fill="#ffffff"/>
+                                    <circle cx="160" cy="145" r="10" fill="#ffffff"/>
+                                    <path d="M60 60L80 80H120L140 60" stroke="#005f99" stroke-width="4"/>
+                                    <path d="M80 40L100 60L120 40" stroke="#005f99" stroke-width="4"/>
+                                </svg>
+                                <h4 class="text-lg font-bold mb-2">Caminhões de Entrega</h4>
+                                <p>Nossa frota de caminhões especializados entrega água tratada diretamente na sua residência.</p>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">2</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    A câmera do óculos captura imagens do ambiente e as envia para o aplicativo EkoVision instalado no smartphone.
-                                </p>
+                            <div class="vintage-card">
+                                <svg width="100%" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+                                    <rect width="200" height="160" rx="4" fill="#e6f3fa"/>
+                                    <rect x="20" y="20" width="40" height="120" rx="2" fill="#005f99"/>
+                                    <rect x="80" y="20" width="40" height="120" rx="2" fill="#005f99"/>
+                                    <rect x="140" y="20" width="40" height="120" rx="2" fill="#005f99"/>
+                                    <rect x="25" y="25" width="30" height="110" rx="1" fill="#ffffff"/>
+                                    <rect x="85" y="25" width="30" height="110" rx="1" fill="#ffffff"/>
+                                    <rect x="145" y="25" width="30" height="110" rx="1" fill="#ffffff"/>
+                                    <rect x="30" y="30" width="20" height="100" rx="1" fill="#80afcf"/>
+                                    <rect x="90" y="30" width="20" height="100" rx="1" fill="#80afcf"/>
+                                    <rect x="150" y="30" width="20" height="100" rx="1" fill="#80afcf"/>
+                                </svg>
+                                <h4 class="text-lg font-bold mb-2">Estoque de Água</h4>
+                                <p>Mantemos um estoque constante de água tratada pronta para distribuição.</p>
                             </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">3</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    O aplicativo utiliza a conexão de internet do celular para enviar as imagens para nossa <span class="text-gold">IA na nuvem</span>, onde são processadas e interpretadas.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">4</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    As descrições geradas são enviadas de volta ao smartphone e transmitidas para as caixas de som do óculos, proporcionando feedback imediato ao usuário.
-                                </p>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mt-1 mr-4 flex-shrink-0">
-                                    <span class="text-gold font-bold">5</span>
-                                </div>
-                                <p class="text-gray-300">
-                                    Todo o processo ocorre em <span class="text-gold">tempo real</span>, com latência mínima, garantindo uma experiência fluida e natural para o usuário.
-                                </p>
+                            <div class="vintage-card col-span-2">
+                                <svg width="100%" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-4">
+                                    <rect width="400" height="120" rx="4" fill="#e6f3fa"/>
+                                    <path d="M20 60C20 60 80 20 140 60C200 100 260 20 320 60C380 100 380 60 380 60" stroke="#005f99" stroke-width="4" stroke-linecap="round"/>
+                                    <circle cx="140" cy="60" r="8" fill="#005f99"/>
+                                    <circle cx="260" cy="20" r="8" fill="#005f99"/>
+                                    <circle cx="320" cy="60" r="8" fill="#005f99"/>
+                                </svg>
+                                <h4 class="text-lg font-bold mb-2">Impacto Ambiental</h4>
+                                <p>Nosso programa já ajudou a reduzir a poluição hídrica em mais de 30% nas regiões onde atuamos, contribuindo diretamente para o alcance da meta ODS 6.3 da ONU.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
+        </main>
 
-    <!-- Simulation Section -->
-    <section id="simulation" class="py-20 bg-dark-light clip-path-slant-reverse relative">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">Simulação</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="max-w-4xl mx-auto bg-dark-darker p-8 rounded-xl shadow-2xl border border-gold/20">
-                <h3 class="text-2xl font-bold mb-6 text-gold text-center">Dashboard Interativo</h3>
-                <p class="text-gray-300 mb-8 text-center">
-                    Experimente como o EkoVision descreve diferentes ambientes. Selecione um cenário e ative a IA para ouvir uma simulação.
-                </p>
-                
-                <div class="flex flex-col md:flex-row items-center mb-8">
-                    <div class="md:w-1/2 mb-6 md:mb-0 flex justify-center">
-                        <div class="perspective-container">
-                            <div id="glasses-container" class="animate-float">
-                                <!-- New Ray-Ban style glasses -->
-                                <svg class="w-64 h-auto glasses-svg" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <!-- Frame Top Bar -->
-                                    <path d="M100 80 H300" stroke="#d4af37" stroke-width="3"/>
-                                    
-                                    <!-- Frame Front -->
-                                    <path d="M100 80 L80 100 L80 130 C80 140, 90 150, 100 150 L140 150 C150 150, 160 140, 160 130 L160 100 L100 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                    <path d="M300 80 L320 100 L320 130 C320 140, 310 150, 300 150 L260 150 C250 150, 240 140, 240 130 L240 100 L300 80" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                                    
-                                    <!-- Bridge -->
-                                    <path d="M160 110 C180 100, 220 100, 240 110" stroke="#d4af37" stroke-width="2"/>
-                                    
-                                    <!-- Lenses (Dark) -->
-                                    <path d="M90 100 L150 100 L150 130 C150 135, 145 140, 140 140 L100 140 C95 140, 90 135, 90 130 L90 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                    <path d="M250 100 L310 100 L310 130 C310 135, 305 140, 300 140 L260 140 C255 140, 250 135, 250 130 L250 100" fill="#1a1a1a" stroke="#d4af37" stroke-width="1.5"/>
-                                    
-                                    <!-- Temple Arms -->
-                                    <path d="M80 120 L50 130" stroke="#d4af37" stroke-width="3"/>
-                                    <path d="M320 120 L350 130" stroke="#d4af37" stroke-width="3"/>
-                                    
-                                    <!-- Mini Camera (top right corner) -->
-                                    <circle cx="310" cy="90" r="6" fill="#121212" stroke="#d4af37" stroke-width="1.5"/>
-                                    <circle cx="310" cy="90" r="3" fill="#d4af37"/>
-                                    <circle cx="310" cy="90" r="1" fill="#ffffff"/>
-                                    
-                                    <!-- Mini Speakers on Temple Arms -->
-                                    <!-- Left Speaker -->
-                                    <rect x="60" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                    <path d="M63 128 L63 133 M66 127 L66 134 M69 128 L69 133" stroke="#d4af37" stroke-width="0.7"/>
-                                    
-                                    <!-- Right Speaker -->
-                                    <rect x="328" y="128" width="12" height="5" rx="2.5" fill="#121212" stroke="#d4af37" stroke-width="1"/>
-                                    <path d="M331 128 L331 133 M334 127 L334 134 M337 128 L337 133" stroke="#d4af37" stroke-width="0.7"/>
-                                    
-                                    <!-- Subtle Ray-Ban style logo hint on temple -->
-                                    <path d="M90 95 L95 95" stroke="#d4af37" stroke-width="1"/>
-                                    
-                                    <!-- Reflection on lenses -->
-                                    <path d="M100 105 L120 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                    <path d="M270 105 L290 105" stroke="#d4af37" stroke-width="0.5" stroke-opacity="0.5"/>
-                                    
-                                    <!-- Camera Active Indicator (hidden by default) -->
-                                    <circle id="camera-indicator" cx="310" cy="90" r="10" fill="#d4af37" fill-opacity="0.3" style="display: none;"/>
+        <!-- Footer -->
+        <footer id="contato" class="bg-[#005f99] text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">AquaNow</h3>
+                        <p class="mb-4">Água fresca, quando você precisa.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-white hover:text-[#80afcf] transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-white hover:text-[#80afcf] transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-white hover:text-[#80afcf] transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-white hover:text-[#80afcf] transition duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Contato</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                <span>(11) 1234-5678</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span>contato@aquanow.com.br</span>
+                            </li>
+                            <li class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span>Av. das Águas, 123 - São Paulo, SP</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Links Rápidos</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="hover:text-[#80afcf] transition duration-300">Início</a></li>
+                            <li><a href="#cadastro" class="hover:text-[#80afcf] transition duration-300">Cadastro</a></li>
+                            <li><a href="#sobre" class="hover:text-[#80afcf] transition duration-300">Sobre Nós</a></li>
+                            <li><a href="#" class="hover:text-[#80afcf] transition duration-300">Política de Privacidade</a></li>
+                            <li><a href="#" class="hover:text-[#80afcf] transition duration-300">Termos de Uso</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Apoio Institucional</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-2 rounded-lg">
+                                <svg width="100%" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="40" rx="4" fill="#ffffff"/>
+                                    <text x="50" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#005f99">Prefeitura</text>
+                                </svg>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg">
+                                <svg width="100%" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="40" rx="4" fill="#ffffff"/>
+                                    <text x="50" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#005f99">Secretaria</text>
+                                </svg>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg">
+                                <svg width="100%" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="40" rx="4" fill="#ffffff"/>
+                                    <text x="50" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#005f99">ONG</text>
+                                </svg>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg">
+                                <svg width="100%" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="40" rx="4" fill="#ffffff"/>
+                                    <text x="50" y="25" font-family="Arial" font-size="10" text-anchor="middle" fill="#005f99">ONU</text>
                                 </svg>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="md:w-1/2 md:pl-8">
-                        <div class="mb-6">
-                            <label for="scenario" class="block text-gold font-medium mb-2">Selecione o cenário:</label>
-                            <select id="scenario" class="w-full bg-dark-darker border border-gold/50 rounded-lg p-3 text-white focus:outline-none focus:border-gold">
-                                <option value="pharmacy">Farmácia</option>
-                                <option value="supermarket">Supermercado</option>
-                                <option value="street">Rua</option>
-                            </select>
-                        </div>
-                        
-                        <button id="activate-ai" class="w-full gold-button bg-gold text-dark-darker font-bold py-4 px-6 rounded-lg shadow-lg hover:bg-gold-dark transition-all duration-300 flex items-center justify-center">
-                            <i class="fas fa-power-off mr-2"></i>
-                            Ativar IA
-                        </button>
-                    </div>
                 </div>
-                
-                <div id="result-container" class="bg-dark-light p-6 rounded-lg border border-gold/20 mb-8 hidden">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center mr-4">
-                            <i class="fas fa-comment-alt text-gold"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold text-gold">Descrição da IA</h4>
-                    </div>
-                    
-                    <div id="ai-description" class="text-white bg-dark-darker p-4 rounded-lg border border-gold/10 mb-4">
-                        Aguardando ativação...
-                    </div>
-                    
-                    <div class="flex items-center text-sm text-gray-400">
-                        <i class="fas fa-info-circle mr-2 text-gold"></i>
-                        <span>Tempo de resposta: <span id="response-time">0.0</span> segundos</span>
-                    </div>
-                </div>
-                
-                <div class="flex justify-center">
-                    <button id="emergency-button" class="gold-button bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300 flex items-center">
-                        <i class="fas fa-exclamation-triangle mr-2"></i>
-                        Chamar ajuda
-                    </button>
+                <div class="border-t border-[#80afcf] mt-8 pt-8 text-center">
+                    <p>&copy; 2023 AquaNow. Todos os direitos reservados.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Team Section -->
-    <section id="team" class="py-20 bg-dark-darker">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
-                <span class="relative inline-block">
-                    <span class="text-gold">Nossa Equipe</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1 bg-gold"></span>
-                </span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Thiago Oliveira</h3>
-                        <p class="text-sm text-gold/70 mb-4">CEO e Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Visionário por trás do EkoVision, com experiência em tecnologias assistivas e inovação social.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Vinicius Sampaio</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Especialista em inteligência artificial e sistemas de visão computacional.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Vitor Alves</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Responsável pelo design e ergonomia do produto, focado na experiência do usuário.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-dark-light rounded-xl overflow-hidden shadow-xl border border-gold/20 transform transition-all hover:-translate-y-2">
-                    <div class="h-40 bg-gradient-to-r from-gold/30 to-gold/10 flex items-center justify-center">
-                        <div class="w-24 h-24 rounded-full bg-dark-darker border-4 border-gold flex items-center justify-center">
-                            <i class="fas fa-user text-3xl text-gold"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gold mb-1">Luiz Renato</h3>
-                        <p class="text-sm text-gold/70 mb-4">Proprietário</p>
-                        <p class="text-gray-300 text-sm">
-                            Especialista em desenvolvimento de software e integração de sistemas.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark-darker py-10 border-t border-gold/20">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="#home" class="flex items-center space-x-2">
-                        <svg class="w-8 h-8" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- New Logo: Stylized E with sound wave -->
-                            <rect x="10" y="10" width="30" height="30" rx="5" fill="#121212" stroke="#d4af37" stroke-width="2"/>
-                            <path d="M15 20 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M15 25 H25" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M15 30 H30" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-                            <!-- Sound wave element -->
-                            <path d="M32 18 C36 18, 38 25, 38 25 C38 25, 36 32, 32 32" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M35 20 C38 20, 40 25, 40 25 C40 25, 38 30, 35 30" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                        <span class="text-xl font-bold text-gold">EkoVision</span>
-                    </a>
-                    <p class="text-gray-400 mt-2">O mundo em som.</p>
-                </div>
-                
-                <div class="flex space-x-6 mb-6 md:mb-0">
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-gold transition-colors">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </a>
-                </div>
-                
-                <div class="text-center md:text-right">
-                    <p class="text-gray-400">&copy; 2023 EkoVision. Todos os direitos reservados.</p>
-                    <p class="text-gray-500 text-sm mt-1">Desenvolvido com ❤️ para acessibilidade</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
@@ -832,32 +527,55 @@
             mobileMenu.classList.toggle('hidden');
         });
         
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
+        // Form submission
+        const cadastroForm = document.getElementById('cadastroForm');
+        const resultadoSection = document.getElementById('resultado');
+        const consumoMensal = document.getElementById('consumoMensal');
+        const voltarInicio = document.getElementById('voltarInicio');
         
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-3');
-            } else {
-                navbar.classList.add('py-3');
-                navbar.classList.remove('py-2');
-            }
+        cadastroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(cadastroForm);
+            const consumoDiario = formData.get('consumo') || 150; // Default to 150L if not provided
+            
+            // Calculate monthly consumption (daily * 30 days)
+            const consumoMensalValue = consumoDiario * 30;
+            
+            // Update the result
+            consumoMensal.textContent = `${consumoMensalValue.toLocaleString()} litros`;
+            
+            // Show result section and hide form section
+            document.getElementById('cadastro').classList.add('hidden');
+            resultadoSection.classList.remove('hidden');
+            
+            // Scroll to result section
+            resultadoSection.scrollIntoView({ behavior: 'smooth' });
         });
         
-        // Smooth Scrolling for Anchor Links
+        voltarInicio.addEventListener('click', () => {
+            // Hide result section and show form section
+            resultadoSection.classList.add('hidden');
+            document.getElementById('cadastro').classList.remove('hidden');
+            
+            // Reset form
+            cadastroForm.reset();
+            
+            // Scroll to home section
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
                     
                     // Close mobile menu if open
                     if (!mobileMenu.classList.contains('hidden')) {
@@ -867,99 +585,43 @@
             });
         });
         
-        // Simulation Functionality
-        const activateAiButton = document.getElementById('activate-ai');
-        const resultContainer = document.getElementById('result-container');
-        const aiDescription = document.getElementById('ai-description');
-        const responseTime = document.getElementById('response-time');
-        const scenarioSelect = document.getElementById('scenario');
-        const cameraIndicator = document.getElementById('camera-indicator');
-        const glassesContainer = document.getElementById('glasses-container');
-        const emergencyButton = document.getElementById('emergency-button');
-        
-        const descriptions = {
-            pharmacy: "Você está em uma farmácia. À sua frente, na prateleira central, encontra-se o produto: Dipirona 500mg. Preço: R$ 8,99. À direita há uma seção de cosméticos. À esquerda está o balcão de atendimento a aproximadamente 3 metros.",
-            supermarket: "Você está no corredor de cereais de um supermercado. À sua frente está: Arroz Integral Tipo 1. Preço: R$ 22,50 por kg. Promoção: leve 2kg, pague R$ 40,00. Corredor de laticínios à direita a aproximadamente 5 metros.",
-            street: "Você está em uma calçada. À sua frente há uma faixa de pedestres a 2 metros. Semáforo está vermelho para pedestres. Há uma parada de ônibus à direita a aproximadamente 10 metros. Detecto movimento de pessoas atravessando à sua esquerda."
-        };
-        
-        activateAiButton.addEventListener('click', () => {
-            // Show camera active indicator
-            cameraIndicator.style.display = 'block';
+        // CPF input mask
+        const cpfInput = document.getElementById('cpf');
+        cpfInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
             
-            // Add processing animation to glasses
-            glassesContainer.classList.remove('animate-float');
-            glassesContainer.classList.add('animate-pulse-slow');
+            if (value.length > 9) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})$/, '$1.$2.$3-$4');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{3})(\d{3})(\d{1,3})$/, '$1.$2.$3');
+            } else if (value.length > 3) {
+                value = value.replace(/^(\d{3})(\d{1,3})$/, '$1.$2');
+            }
             
-            // Show loading state
-            resultContainer.classList.remove('hidden');
-            aiDescription.textContent = "Processando imagem...";
-            
-            // Simulate processing time
-            const processingTime = Math.random() * (1.5 - 0.8) + 0.8;
-            
-            setTimeout(() => {
-                // Get selected scenario
-                const scenario = scenarioSelect.value;
-                
-                // Update description
-                aiDescription.textContent = descriptions[scenario];
-                responseTime.textContent = processingTime.toFixed(1);
-                
-                // Return glasses to normal state
-                setTimeout(() => {
-                    cameraIndicator.style.display = 'none';
-                    glassesContainer.classList.remove('animate-pulse-slow');
-                    glassesContainer.classList.add('animate-float');
-                }, 1000);
-                
-            }, processingTime * 1000);
+            e.target.value = value;
         });
         
-        emergencyButton.addEventListener('click', () => {
-            // Create emergency modal
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-80';
-            modal.innerHTML = `
-                <div class="bg-dark-light p-8 rounded-xl max-w-md w-full border border-red-500 shadow-2xl">
-                    <div class="flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center animate-pulse">
-                            <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-center text-red-500">Emergência Ativada</h3>
-                    <p class="text-gray-300 mb-6 text-center">
-                        Enviando sua localização atual para seus contatos de emergência.
-                    </p>
-                    <div class="bg-dark-darker p-4 rounded-lg mb-6">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-gray-400">Status:</span>
-                            <span class="text-green-500">Localização enviada</span>
-                        </div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-gray-400">Coordenadas:</span>
-                            <span class="text-white">-23.5505, -46.6333</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-gray-400">Contatos notificados:</span>
-                            <span class="text-white">3</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-center">
-                        <button id="close-emergency" class="bg-white text-red-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300">
-                            Fechar
-                        </button>
-                    </div>
-                </div>
-            `;
+        // Phone input mask
+        const phoneInput = document.getElementById('celular');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) {
+                value = value.slice(0, 11);
+            }
             
-            document.body.appendChild(modal);
+            if (value.length > 10) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            } else if (value.length > 6) {
+                value = value.replace(/^(\d{2})(\d{4,5})(\d{0,4})$/, '($1) $2-$3');
+            } else if (value.length > 2) {
+                value = value.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+            }
             
-            // Add event listener to close button
-            document.getElementById('close-emergency').addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
+            e.target.value = value;
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94a30c5087aef1d5',t:'MTc0ODk5NDE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94b165d463736eb2',t:'MTc0OTE0NDYyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
